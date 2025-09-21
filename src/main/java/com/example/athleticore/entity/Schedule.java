@@ -1,6 +1,6 @@
-package com.example.athleticore.Entity;
+package com.example.athleticore.entity;
 
-import com.example.athleticore.Entity.users.Trainer;
+import com.example.athleticore.entity.users.Trainer;
 import com.example.athleticore.dto.TimeSlot;
 
 import java.util.List;
