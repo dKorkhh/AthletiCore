@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: AthletiCore
+        holiday-api:
+            url: "https://date.nager.at/api/v3/PublicHolidays/%s/%s"
+            region: "UA"
+            date-format: "yyyy-MM-dd"
