@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/styles.css">
 </head>
 <body>
-    <h1>Welcome to the Home Page</h1>
+    <div th:replace="~{fragment/topbar :: topbar}"></div>
+
+    <div class="content">
+        <h1>Активність</h1>
+        <div class="sports-grid">
+            <div th:each="sessionSport : ${sessions}" class="sport-card">
+                <h2 th:text="${sessionSport.name}">Sport Name</h2>
+                <p th:text="${sessionSport.description}">Description of the sport activity.</p>
+            </div>
+        </div>
+    </div>
+
+    <h1>Календар вихідних днів в Україні (2025)</h1>
+    <table class="holidays-table">
+        <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Назва</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="holiday : ${holidays}">
+            <td th:text="${holiday.date}">Дата</td>
+            <td th:text="${holiday.localName}">Назва</td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
