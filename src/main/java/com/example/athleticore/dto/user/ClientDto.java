@@ -1,12 +1,11 @@
 package com.example.athleticore.dto.user;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Builder
-public class ClientDto extends User{
-    private FullName fullName;
-    private String email;
-    private String password;
+@NoArgsConstructor
+@AllArgsConstructor
+public class ClientDto extends UserDto {
+    private String phoneNumber;
 }

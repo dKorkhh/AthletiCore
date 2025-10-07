@@ -5,3 +5,14 @@ spring:
             url: "https://date.nager.at/api/v3/PublicHolidays/%s/%s"
             region: "UA"
             date-format: "yyyy-MM-dd"
+    datasource:
+        url: jdbc:h2:mem:mydb
+        username: sa
+        password: password
+        driverClassName: org.h2.Driver
+    h2:
+        console:
+        enabled: true
+        path: /h2-console
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
