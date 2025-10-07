@@ -25,6 +25,6 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public void createSession(SessionDto session) {
         //create and add to db
-        notificationService.sendNotification(session.getTrainer(), "New session created");
+        //notificationService.sendNotification(session.getTrainer(), "New session created");
     }
 }
