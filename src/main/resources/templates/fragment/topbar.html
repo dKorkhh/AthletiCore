@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Bar Fragment</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Bar Fragment</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/styles.css">
 </head>
 <body>
 <div th:fragment="topbar" class="top-bar">
-  <div class="logo">MyApp</div>
-  <nav>
-    <a href="/" th:href="@{/}">Home</a>
-    <a href="/about" th:href="@{/auth/login}">Login</a>
-  </nav>
+    <div class="logo">MyApp</div>
+    <nav>
+        <a href="/" th:href="@{/}">Home</a>
+        <a href="/auth/login" th:href="@{/auth/login}">Login</a>
+        <a href="/auth/register" th:href="@{/auth/register}">Sing up</a>
+    </nav>
 </div>
 </body>
 </html>

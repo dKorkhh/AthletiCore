@@ -1,13 +1,14 @@
 package com.example.athleticore.dto.user;
 
-import lombok.Data;
-import lombok.NonNull;
+import jakarta.persistence.Embeddable;
+import lombok.*;
 
+@Embeddable
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class FullName {
-    @NonNull
-    private String firstname;
-    @NonNull
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String middleName;
 }
