@@ -1,11 +1,12 @@
 package com.example.athleticore.service.impl.session;
 
+import com.example.athleticore.dto.NotificationDto;
 import com.example.athleticore.dto.bookings.BookingDto;
-import com.example.athleticore.entity.Notification;
 import com.example.athleticore.service.BookingService;
 import com.example.athleticore.service.impl.notification.NotificationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -20,7 +21,7 @@ public class BookingServiceImpl implements BookingService {
         // save
         sessionService.incrementSessionCount(bookingDto.getSession());
         notificationService.subscribeToNotifications(
-                Notification.builder()
+                NotificationDto.builder()
                         .client(bookingDto.getClient())
                         .session(bookingDto.getSession()).build());
     }
@@ -29,7 +30,7 @@ public class BookingServiceImpl implements BookingService {
     public void cancelBooking(BookingDto bookingDto) {
         sessionService.decrementSessionCount(bookingDto.getSession());
         notificationService.unsubscribeFromNotifications(
-                Notification.builder()
+                NotificationDto.builder()
                         .client(bookingDto.getClient())
                         .session(bookingDto.getSession()).build());
     }
