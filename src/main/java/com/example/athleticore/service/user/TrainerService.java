@@ -1,4 +1,4 @@
-package com.example.athleticore.service.impl.user;
+package com.example.athleticore.service.user;
 
 import com.example.athleticore.dto.user.TrainerDto;
 import com.example.athleticore.entity.users.Trainer;
