@@ -4,6 +4,7 @@ import com.example.athleticore.dto.calendar.HolidayDto;
 import com.example.athleticore.exception.data.CallApiException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Service
 @Setter
+@ConditionalOnClass(name = "com.example.athleticore.utils.validation.DateIsNotHolidayValidator")
 public class HolidayService {
     private RestTemplate restTemplate;
 
