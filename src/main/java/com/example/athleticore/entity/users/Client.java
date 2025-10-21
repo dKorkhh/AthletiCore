@@ -19,6 +19,11 @@ public class Client extends User {
 
     private String phoneNumber;
 
-    @ManyToMany(mappedBy = "clients")
+    @ManyToMany
+    @JoinTable(
+            name = "client_notifications",
+            joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "notification_id")
+    )
     private Set<Notification> notifications = new HashSet<>();
 }

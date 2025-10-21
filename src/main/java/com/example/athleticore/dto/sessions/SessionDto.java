@@ -1,5 +1,6 @@
 package com.example.athleticore.dto.sessions;
 
+import com.example.athleticore.dto.user.TrainerDto;
 import com.example.athleticore.entity.users.Trainer;
 import com.example.athleticore.enums.Category;
 import com.example.athleticore.enums.Difficulty;
@@ -25,7 +26,7 @@ public class SessionDto {
     private LocalDate date;
     private int duration;
     @NotNull
-    private Trainer trainer;
+    private TrainerDto trainer;
     private Difficulty difficulty;
     @NotNull
     private Category category;

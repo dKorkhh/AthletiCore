@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "fe6b55f5-1192-4813-8cc3-156c0a154d2d",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48648735",
+		"_collection_link": "https://danamushchenko-5135827.postman.co/workspace/Dana-Mushchenko's-Workspace~9dfe4daf-ab60-4611-81dc-4e47bc639c49/collection/48648735-fe6b55f5-1192-4813-8cc3-156c0a154d2d?action=share&source=collection_link&creator=48648735"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "create trainer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201 CREATE\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has values\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"\r",
+									"    pm.expect(json.role).to.eql(\"TRAINER\");\r",
+									"    pm.expect(json.id).to.be.above(0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": {\r\n        \"firstName\": \"Jon\",\r\n        \"lastName\": \"News\"\r\n    },\r\n    \"email\": \"jonNewss@gmail.com\",\r\n    \"password\": \"1236\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL}}/api/trainers/",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"api",
+								"trainers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201 CREATE\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Have values\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"\r",
+									"    pm.expect(json.fullName.firstName).to.eql(\"Jon\");\r",
+									"    pm.expect(json.fullName.lastName).to.eql(\"News\");\r",
+									"    pm.expect(json.fullName.middleName).to.eql(null);\r",
+									"\r",
+									"    pm.expect(json.email).to.eql(\"jonNewss@gmail.com\");\r",
+									"    pm.expect(json.password).to.eql(\"1236\");\r",
+									"    pm.expect(json.role).to.eql(\"CLIENT\");\r",
+									"    pm.expect(json.id).to.eql(1);\r",
+									"    pm.expect(json.phoneNumber).to.eql(\"+380508109120\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": {\r\n        \"firstName\": \"Jon\",\r\n        \"lastName\": \"News\"\r\n    },\r\n    \"email\": \"jonNewss@gmail.com\",\r\n    \"password\": \"1236\",\r\n    \"phoneNumber\": \"+380508109120\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL}}/api/clients/",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"api",
+								"clients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Email has changed\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"\r",
+									"    pm.expect(json.email).to.eql(\"newEmail@gmail.com\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUser\": 1,\r\n    \"email\": \"newEmail@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL}}/api/clients/",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"api",
+								"clients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Array is not empty\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"\r",
+									"    pm.expect(json.length).to.be.above(0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL}}/api/clients/",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"api",
+								"clients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL}}/api/clients/?id=1",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"api",
+								"clients",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "session",
+			"item": [
+				{
+					"name": "create Session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201 CREATE\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has trainer\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"\r",
+									"    pm.expect(json.trainer.id).to.be.above(0);\r",
+									"    pm.expect(json.id).to.be.above(0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Crossfit\",\r\n    \"sessionType\": \"GROUP\",\r\n    \"date\": \"2020-03-19\",\r\n    \"duration\": 45, \r\n    \"trainer\":{\r\n        \"fullName\": {\r\n            \"firstName\": \"Jon\",\r\n            \"lastName\": \"News\"\r\n        },\r\n        \"email\": \"jonNewss@gmail.com\"\r\n    },\r\n    \"difficulty\": \"NORMAL\",\r\n    \"category\": \"YOGA\", \r\n    \"maxParticipants\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL}}/api/sessions/",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"api",
+								"sessions",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

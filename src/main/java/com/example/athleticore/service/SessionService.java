@@ -6,5 +6,5 @@ import com.example.athleticore.entity.Session;
 public interface SessionService {
     void incrementSessionCount(Session sessionId);
     void decrementSessionCount(Session sessionId);
-    void createSession(SessionDto session);
+    Session createSession(SessionDto session);
 }
