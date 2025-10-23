@@ -2,19 +2,19 @@ package com.example.athleticore.controller.appointment;
 
 import com.example.athleticore.dto.sessions.SessionDto;
 import com.example.athleticore.dto.sessions.UpdateSessionFields;
+import com.example.athleticore.entity.Session;
+import com.example.athleticore.service.impl.session.SessionServiceImpl;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/session")
+@RequestMapping("/api/sessions")
+@RequiredArgsConstructor
 public class SessionController {
+    private final SessionServiceImpl sessionService;
+
     @GetMapping("/{idUser}")
     public void getSessionByUser(@PathVariable Long idUser){
         //return session.getVyId();
@@ -22,8 +22,9 @@ public class SessionController {
 
     //permission - manager(create new repeat session and connects trainer)
     @PostMapping("/")
-    public void createSession(@Valid @RequestBody SessionDto sessionDto){
-        //send notification to trainer to accept(optional)
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Session createSession(@Valid @RequestBody SessionDto sessionDto){
+        return sessionService.createSession(sessionDto);
     }
 
     //permission - manager(create new repeat session and connects trainer)

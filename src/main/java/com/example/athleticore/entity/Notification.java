@@ -24,12 +24,7 @@ public class Notification {
     private String message;
     private LocalDate date;
 
-    @ManyToMany
-    @JoinTable(
-            name = "notification_clients",
-            joinColumns = @JoinColumn(name = "notification_id"),
-            inverseJoinColumns = @JoinColumn(name = "client_id")
-    )
+    @ManyToMany(mappedBy = "notifications")
     private Set<Client> clients;
 
     @OneToOne

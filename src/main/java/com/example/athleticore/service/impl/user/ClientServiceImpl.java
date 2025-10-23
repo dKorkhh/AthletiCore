@@ -1,7 +1,10 @@
 package com.example.athleticore.service.impl.user;
 
+import com.example.athleticore.dto.patch.PatchDto;
 import com.example.athleticore.dto.user.ClientDto;
 import com.example.athleticore.entity.users.Client;
+import com.example.athleticore.enums.Role;
+import com.example.athleticore.exception.user.NoSuchUserException;
 import com.example.athleticore.mapper.ClientMapper;
 import com.example.athleticore.repository.ClientRepository;
 import com.example.athleticore.service.user.ClientService;
@@ -29,6 +32,7 @@ public class ClientServiceImpl implements ClientService {
         ThreadContext.put("operation", "addUser");
         try {
             Client client = clientMapper.toEntity(clientDto);
+            client.setRole(Role.CLIENT);
             Client savedClient = clientRepository.save(client);
             ThreadContext.put("clientId", savedClient.getId().toString());
             logger.info(USER_OPS, "Successfully added user with ID: {}", savedClient.getId());
@@ -42,7 +46,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Optional<Client> getUserById(Long id) {
+    public Client getUserById(Long id) {
         ThreadContext.put("operation", "getUserById");
         ThreadContext.put("clientId", id.toString());
         try {
@@ -52,7 +56,7 @@ public class ClientServiceImpl implements ClientService {
             } else {
                 logger.warn(USER_OPS, "No user found with ID: {}", id);
             }
-            return client;
+            return client.orElseThrow(() -> new NoSuchUserException("No client with ID: " + id));
         } catch (Exception e) {
             logger.error(USER_OPS, "Error fetching user with ID: {}. Error: {}", id, e.getMessage());
             throw e;
@@ -74,5 +78,23 @@ public class ClientServiceImpl implements ClientService {
         } finally {
             ThreadContext.clearMap();
         }
+    }
+
+    @Override
+    public Client getUserByEmail(String email) {
+        return clientRepository.getClientByEmail(email)
+                .orElseThrow(() -> new NoSuchUserException("No client with email: " + email));
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        clientRepository.deleteById(id);
+    }
+
+    @Override
+    public Client updateUser(PatchDto patchDto) {
+        Client existingClient = getUserById(patchDto.getIdUser());
+        existingClient.setEmail(patchDto.getEmail());
+        return clientRepository.save(existingClient);
     }
 }

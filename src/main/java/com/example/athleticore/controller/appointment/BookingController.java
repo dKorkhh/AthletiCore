@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
-@RequestMapping("/book")
+@RequestMapping("/api/book")
 @Validated
 public class BookingController {
     @GetMapping("/")
