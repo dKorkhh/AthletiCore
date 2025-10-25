@@ -16,10 +16,10 @@ VALUES
     (4);
 
 -- ===== SESSIONS =====
-INSERT INTO SESSIONS (NAME, DESCRIPTION, SESSION_TYPE, DATE, DURATION, USER_ID, CATEGORY, DIFFICULTY, MAX_PARTICIPANTS, SCHEDULE_ID)
+INSERT INTO SESSIONS (NAME, DESCRIPTION, SESSION_TYPE, DATE, IS_REPEAT, DURATION, USER_ID, CATEGORY, DIFFICULTY, MAX_PARTICIPANTS, SCHEDULE_ID)
 VALUES
-    ('Morning Cardio', 'Intense morning cardio session to boost energy.', 'GROUP', '2025-11-05', 60, 1, 'FITNESS', 'NORMAL', 15, 1),
-    ('Yoga for Beginners', 'Relaxing yoga class for beginners focusing on flexibility.', 'GROUP', '2025-11-06', 75, 2, 'YOGA', 'LIGHT', 12, 2),
-    ('Personal Training', 'One-on-one strength training with John Doe.', 'INDIVIDUAL', '2025-11-07', 90, 1, 'FITNESS', 'HARD', 1, 1),
-    ('Stretch & Relax', 'Gentle stretching and breathing exercises.', 'GROUP', '2025-11-08', 45, 2, 'BOXING', 'LIGHT', 10, 2),
-    ('Pilates Core', 'Focus on core stability and posture.', 'GROUP', '2025-11-09', 60, 2, 'PILATES', 'NORMAL', 10, 2);
+    ('Morning Cardio', 'Intense morning cardio session to boost energy.', 'GROUP', '2025-11-05', true, 60, 1, 'FITNESS', 'NORMAL', 15, 1),
+    ('Yoga for Beginners', 'Relaxing yoga class for beginners focusing on flexibility.', 'GROUP', '2025-11-06', true, 75, 2, 'YOGA', 'LIGHT', 12, 2),
+    ('Personal Training', 'One-on-one strength training with John Doe.', 'INDIVIDUAL', '2025-11-07', 90, false, 1, 'FITNESS', 'HARD', 1, 1),
+    ('Stretch & Relax', 'Gentle stretching and breathing exercises.', 'GROUP', '2025-11-08', true, 45, 2, 'BOXING', 'LIGHT', 10, 2),
+    ('Pilates Core', 'Focus on core stability and posture.', 'GROUP', '2025-11-09', false, 60, 2, 'PILATES', 'NORMAL', 10, 2);

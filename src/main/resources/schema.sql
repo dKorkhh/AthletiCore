@@ -25,6 +25,7 @@ CREATE TABLE SESSIONS
     DESCRIPTION      VARCHAR(1000),
     SESSION_TYPE     VARCHAR(50),
     DATE             DATE,
+    IS_REPEAT           BOOLEAN,
     DURATION         INT,
     USER_ID          BIGINT       NOT NULL,
     CATEGORY         VARCHAR(50),

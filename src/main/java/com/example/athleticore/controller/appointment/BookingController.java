@@ -3,9 +3,12 @@ package com.example.athleticore.controller.appointment;
 import com.example.athleticore.entity.Booking;
 import com.example.athleticore.dto.bookings.BookingDto;
 import com.example.athleticore.dto.bookings.UpdateBookingFields;
+import com.example.athleticore.service.impl.session.SessionServiceImpl;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +24,24 @@ import java.util.List;
 @Controller
 @RequestMapping("/api/book")
 @Validated
+@RequiredArgsConstructor
 public class BookingController {
+    private final SessionServiceImpl sessionService;
+
     @GetMapping("/")
     public List<Booking> getAllBookings(){
         return Collections.emptyList();
     }
 
-    @GetMapping("/{userId}")
-    public List<Booking> getBookingsByUser(@PathVariable Long userId){
-        return Collections.emptyList();
+    @GetMapping("/{sessionId}")
+    //@PreAuthorize("hasRole('ROLE_CLIENT')")
+    public String showBookingPage(@PathVariable Long sessionId, Model model){
+        //make booking and connecting to existing session
+        BookingDto bookingDto = BookingDto.builder()
+                .date(sessionService.getSessionById(sessionId).getDate()).build();
+        model.addAttribute("bookingDto", bookingDto);
+
+        return "booking/bookingPage";
     }
 
     //role - user
@@ -50,4 +62,6 @@ public class BookingController {
     public void cancelBooking(){
 
     }
+
+
 }

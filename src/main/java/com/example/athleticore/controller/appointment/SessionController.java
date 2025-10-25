@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class SessionController {
     private final SessionServiceImpl sessionService;
 
-    @GetMapping("/")
+    @GetMapping()
     public String getSession(Model model) {
         model.addAttribute("trainingSessions", sessionService.getSessions());
         return "session/CatalogSession";

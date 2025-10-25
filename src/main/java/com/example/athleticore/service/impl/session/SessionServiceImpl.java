@@ -3,6 +3,7 @@ package com.example.athleticore.service.impl.session;
 import com.example.athleticore.dto.sessions.SessionDto;
 import com.example.athleticore.entity.Session;
 import com.example.athleticore.entity.users.User;
+import com.example.athleticore.exception.data.NoDataFoundException;
 import com.example.athleticore.exception.user.NoSuchUserException;
 import com.example.athleticore.mapper.SessionMapper;
 import com.example.athleticore.repository.SessionRepository;
@@ -49,5 +50,11 @@ public class SessionServiceImpl implements SessionService {
     public List<Session> getSessions() {
         System.out.println(sessionRepository.findAll());
         return sessionRepository.findAll();
+    }
+
+    @Override
+    public Session getSessionById(Long id) {
+        return sessionRepository.findById(id)
+                .orElseThrow(() -> new NoDataFoundException("No session with id = ".concat(String.valueOf(id))));
     }
 }

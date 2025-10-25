@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class MainController {
             @ApiResponse(responseCode = "200", description = "Successful operation"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @GetMapping("/")
+    @GetMapping(value = {"/", ""})
     public String getHomePage(Model model) {
         model.addAttribute("sessions", List.of(
                 Session.builder().name("some sport").description("dfgsdfgfd").build(),

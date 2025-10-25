@@ -10,4 +10,5 @@ public interface SessionService {
     void decrementSessionCount(Session sessionId);
     Session createSession(SessionDto session);
     List<Session> getSessions();
+    Session getSessionById(Long id);
 }

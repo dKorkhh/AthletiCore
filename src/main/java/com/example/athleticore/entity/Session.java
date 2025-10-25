@@ -34,6 +34,8 @@ public class Session {
 
     private LocalDateTime date;
 
+    private boolean isRepeat;
+
     private int duration;
 
     @ManyToOne

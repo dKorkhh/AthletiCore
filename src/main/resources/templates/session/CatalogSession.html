@@ -19,11 +19,11 @@
     </div>
 
     <div class="session-container">
-        <div class="session-card"
-             th:each="trainingSession : ${trainingSessions}"
-             th:text="${trainingSession.name}">
-            Session
-        </div>
+        <a class="session-card"
+           th:each="trainingSession : ${trainingSessions}"
+           th:href="@{/api/book/{id}(id=${trainingSession.id})}">
+            <span th:text="${trainingSession.name}">Session</span>
+        </a>
     </div>
 </main>
 </body>
