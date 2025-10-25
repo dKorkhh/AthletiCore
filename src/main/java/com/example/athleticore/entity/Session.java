@@ -9,6 +9,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -27,13 +28,12 @@ public class Session {
 
     private String name;
 
-    @Column(length = 1000)
     private String description;
 
     @Enumerated(EnumType.STRING)
     private SessionType sessionType;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     private int duration;
 

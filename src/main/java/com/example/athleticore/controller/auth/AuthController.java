@@ -20,21 +20,4 @@ public class AuthController {
     public void login(@Valid @RequestBody CredentialDto credentialDto){
 
     }
-
-    @GetMapping("/register/{role}")
-    public String register(@PathVariable String role, Model model){
-        UserDto userDto = new UserDto();
-        userDto.setFullName(new FullName());
-        userDto.setRole(role);
-        model.addAttribute("userDto", userDto);
-
-        return "auth/registration";
-    }
-
-    @PostMapping("/register")
-    public String register(@RequestBody UserDto userDto){
-        authService.saveUser(userDto);
-
-        return "redirect:/";
-    }
 }
