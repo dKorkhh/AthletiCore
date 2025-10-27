@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class SessionDto {
@@ -23,7 +24,7 @@ public class SessionDto {
     private SessionType sessionType;
     @NotNull
     @DateIsNotHolidayValidator
-    private LocalDate date;
+    private LocalDateTime date;
     private int duration;
     @NotNull
     private TrainerDto trainer;
