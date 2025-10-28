@@ -1,9 +1,8 @@
 package com.example.athleticore.controller.users;
 
-import com.example.athleticore.dto.user.TrainerDto;
-import com.example.athleticore.entity.users.Client;
-import com.example.athleticore.entity.users.Trainer;
-import com.example.athleticore.service.impl.user.TrainerServiceImpl;
+import com.example.athleticore.dto.user.UserDto;
+import com.example.athleticore.entity.users.User;
+import com.example.athleticore.service.impl.user.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +14,10 @@ import java.util.List;
 @RequestMapping("/api/trainers")
 @RequiredArgsConstructor
 public class TrainerController {
-    private final TrainerServiceImpl trainerService;
+    private UserServiceImpl userService;
 
     @GetMapping("/")
-    public List<Client> getAllTrainers(){
+    public List<User> getAllTrainers(){
         return Collections.emptyList();
     }
 
@@ -29,7 +28,7 @@ public class TrainerController {
 
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Trainer addTrainer(@RequestBody TrainerDto trainerDto){
-        return trainerService.addUser(trainerDto);
+    public User addTrainer(@RequestBody UserDto trainerDto){
+        return userService.addUser(trainerDto);
     }
 }

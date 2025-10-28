@@ -2,12 +2,13 @@ package com.example.athleticore.service.impl.session;
 
 import com.example.athleticore.dto.sessions.SessionDto;
 import com.example.athleticore.entity.Session;
-import com.example.athleticore.entity.users.Trainer;
+import com.example.athleticore.entity.users.User;
+import com.example.athleticore.exception.user.NoSuchUserException;
 import com.example.athleticore.mapper.SessionMapper;
 import com.example.athleticore.repository.SessionRepository;
 import com.example.athleticore.service.SessionService;
 import com.example.athleticore.service.impl.notification.NotificationServiceImpl;
-import com.example.athleticore.service.impl.user.TrainerServiceImpl;
+import com.example.athleticore.service.impl.user.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SessionServiceImpl implements SessionService {
     private final NotificationServiceImpl notificationService;
-    private final TrainerServiceImpl trainerService;
+    private final UserServiceImpl userService;
     private final SessionRepository sessionRepository;
     private final SessionMapper sessionMapper;
 
@@ -33,7 +34,8 @@ public class SessionServiceImpl implements SessionService {
     public Session createSession(SessionDto session) {
         Session sessionEntity = sessionMapper.toSessionEntity(session);
 
-        Trainer trainer = trainerService.getUserByEmail(session.getTrainer().getEmail());
+        User trainer = userService.getUserByEmail(session.getTrainer().getEmail())
+                .orElseThrow(() -> new NoSuchUserException("No user"));
 
         sessionEntity.setTrainer(trainer);
         sessionRepository.save(sessionEntity);

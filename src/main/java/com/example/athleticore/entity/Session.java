@@ -1,6 +1,6 @@
 package com.example.athleticore.entity;
 
-import com.example.athleticore.entity.users.Trainer;
+import com.example.athleticore.entity.users.User;
 import com.example.athleticore.enums.Category;
 import com.example.athleticore.enums.Difficulty;
 import com.example.athleticore.enums.SessionType;
@@ -8,7 +8,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
@@ -38,8 +37,8 @@ public class Session {
     private int duration;
 
     @ManyToOne
-    @JoinColumn(name = "trainer_id", nullable = false)
-    private Trainer trainer;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User trainer;
 
     @Enumerated(EnumType.STRING)
     private Category category;

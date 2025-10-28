@@ -1,7 +1,6 @@
 package com.example.athleticore.dto.sessions;
 
-import com.example.athleticore.dto.user.TrainerDto;
-import com.example.athleticore.entity.users.Trainer;
+import com.example.athleticore.dto.user.UserDto;
 import com.example.athleticore.enums.Category;
 import com.example.athleticore.enums.Difficulty;
 import com.example.athleticore.enums.SessionType;
@@ -10,7 +9,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -27,7 +25,7 @@ public class SessionDto {
     private LocalDateTime date;
     private int duration;
     @NotNull
-    private TrainerDto trainer;
+    private UserDto trainer;
     private Difficulty difficulty;
     @NotNull
     private Category category;

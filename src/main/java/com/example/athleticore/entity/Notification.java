@@ -1,6 +1,6 @@
 package com.example.athleticore.entity;
 
-import com.example.athleticore.entity.users.Client;
+import com.example.athleticore.entity.users.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +25,7 @@ public class Notification {
     private LocalDate date;
 
     @ManyToMany(mappedBy = "notifications")
-    private Set<Client> clients;
+    private Set<User> clients;
 
     @OneToOne
     @JoinColumn(name = "session_id")
