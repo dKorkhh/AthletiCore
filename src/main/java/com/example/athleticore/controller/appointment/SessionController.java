@@ -7,6 +7,7 @@ import com.example.athleticore.service.impl.session.SessionServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,6 +17,7 @@ public class SessionController {
     private final SessionServiceImpl sessionService;
 
     @GetMapping("/{idUser}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'TRAINER')")
     public void getSessionByUser(@PathVariable Long idUser){
         //return session.getVyId();
     }
@@ -23,18 +25,21 @@ public class SessionController {
     //permission - manager(create new repeat session and connects trainer)
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
+    @PreAuthorize("hasRole('CLIENT')")
     public Session createSession(@Valid @RequestBody SessionDto sessionDto){
         return sessionService.createSession(sessionDto);
     }
 
     //permission - manager(create new repeat session and connects trainer)
     @PatchMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'TRAINER')")
     public void updateSession(@PathVariable Long id, @RequestBody UpdateSessionFields updateSessionFields){
 
     }
 
     //permission - manager(create new repeat session and connects trainer)
     @DeleteMapping("/")
+    @PreAuthorize("hasRole('CLIENT')")
     public void deleteSession(){
 
     }
