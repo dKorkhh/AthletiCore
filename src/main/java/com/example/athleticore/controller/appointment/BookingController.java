@@ -4,6 +4,7 @@ import com.example.athleticore.entity.Booking;
 import com.example.athleticore.dto.bookings.BookingDto;
 import com.example.athleticore.dto.bookings.UpdateBookingFields;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,16 +34,19 @@ public class BookingController {
 
     //role - user
     @PostMapping("/")
+    @PreAuthorize("hasRole('CLIENT')")
     public void createBooking(@Valid @RequestBody BookingDto bookingDto){
         //make booking and connecting to existing session
     }
 
     @PatchMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
     public void updateBooking(@PathVariable Long id, @RequestBody UpdateBookingFields updateBookingFields){
 
     }
 
     @DeleteMapping("/deleteBook")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
     public void cancelBooking(){
 
     }
