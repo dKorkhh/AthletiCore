@@ -5,7 +5,6 @@ import com.example.athleticore.exception.user.BadCredentialsException;
 import com.example.athleticore.exception.user.DeletingTrainerException;
 import com.example.athleticore.exception.data.NoDataFoundException;
 import com.example.athleticore.exception.user.NoSuchUserException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -2,7 +2,6 @@ package com.example.athleticore.dto.user;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @Embeddable
 @Data

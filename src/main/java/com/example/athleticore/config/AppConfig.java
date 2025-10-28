@@ -1,11 +1,9 @@
 package com.example.athleticore.config;
 
-import com.example.athleticore.service.impl.notification.NotificationServiceImpl;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import org.example.springbootstarternotification.NotificationDefaultService;
 import org.springdoc.core.models.GroupedOpenApi;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
