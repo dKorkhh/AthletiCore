@@ -9,6 +9,7 @@ import com.example.athleticore.repository.UserRepository;
 import com.example.athleticore.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,11 +22,13 @@ public class UserServiceImpl implements UserService {
     private static final Marker USER_OPS = MarkerManager.getMarker("USER_OPERATION");
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User addUser(UserDto userDto) {
         User user = userMapper.toEntity(userDto);
         user.setRole(Role.CLIENT);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userRepository.save(user);
 
         return user;
