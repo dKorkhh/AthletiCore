@@ -3,7 +3,6 @@ package com.example.athleticore.service.user;
 import com.example.athleticore.dto.patch.PatchDto;
 import com.example.athleticore.dto.user.UserDto;
 import com.example.athleticore.entity.users.User;
-import com.example.athleticore.enums.Role;
 
 import java.util.List;
 import java.util.Optional;
