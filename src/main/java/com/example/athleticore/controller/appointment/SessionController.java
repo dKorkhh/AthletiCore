@@ -8,13 +8,21 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/api/sessions")
 @RequiredArgsConstructor
 public class SessionController {
     private final SessionServiceImpl sessionService;
+
+    @GetMapping("/")
+    public String showPageWithAllSession(Model model){
+        model.addAttribute("trainingSessions", sessionService.getSessions());
+        return "session/CatalogSession";
+    }
 
     @GetMapping("/{idUser}")
     @PreAuthorize("hasAnyRole('ADMIN', 'TRAINER')")

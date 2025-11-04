@@ -1,9 +1,12 @@
 package com.example.athleticore.config;
 
+import com.example.athleticore.service.impl.notification.NotificationServiceImpl;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import org.example.springbootstarternotification.NotificationDefaultService;
+import org.example.springbootstarternotification.NotificationProperties;
 import org.springdoc.core.models.GroupedOpenApi;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,11 +22,11 @@ public class AppConfig {
         return new RestTemplate();
     }
 
-    /*@Bean
-    @ConditionalOnMissingBean(NotificationDefaultService.class)
-    public NotificationServiceImpl defaultNotificationService() {
-        return new NotificationServiceImpl();
-    }*/
+    @Bean
+    @ConditionalOnMissingBean(NotificationServiceImpl.class)
+    public NotificationDefaultService defaultNotificationService() {
+        return new NotificationDefaultService(new NotificationProperties());
+    }
 
     @Bean
     public OpenAPI customOpenAPI() {
