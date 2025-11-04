@@ -4,5 +4,6 @@ public enum Category {
     YOGA,
     PILATES,
     BOXING,
-    SWIMMING
+    SWIMMING,
+    FITNESS
 }

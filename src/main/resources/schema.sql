@@ -39,12 +39,14 @@ CREATE TABLE notifications
 (
     ID         BIGINT AUTO_INCREMENT PRIMARY KEY,
     MESSAGE    VARCHAR(255),
+    DATE       DATE,
     SESSION_ID BIGINT,
     CONSTRAINT fk_session
         FOREIGN KEY (SESSION_ID) REFERENCES SESSIONS (ID)
 );
 
-CREATE TABLE client_notifications
+
+CREATE TABLE USER_NOTIFICATIONS
 (
     user_id       BIGINT NOT NULL,
     notification_id BIGINT NOT NULL,
@@ -52,3 +54,4 @@ CREATE TABLE client_notifications
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (notification_id) REFERENCES notifications (id)
 );
+

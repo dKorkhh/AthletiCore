@@ -13,7 +13,7 @@ public class Schedule {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "trainer_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User trainer;
 
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)

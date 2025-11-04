@@ -12,6 +12,8 @@ import com.example.athleticore.service.impl.user.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SessionServiceImpl implements SessionService {
@@ -41,5 +43,11 @@ public class SessionServiceImpl implements SessionService {
         sessionRepository.save(sessionEntity);
 
         return sessionEntity;
+    }
+
+    @Override
+    public List<Session> getSessions() {
+        System.out.println(sessionRepository.findAll());
+        return sessionRepository.findAll();
     }
 }
