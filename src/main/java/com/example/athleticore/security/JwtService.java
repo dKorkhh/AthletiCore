@@ -60,7 +60,7 @@ public class JwtService {
     private String generateToken(UserDto user, Date expiration) {
         Map<String, String> claims = new HashMap<>();
         claims.put("email", user.getEmail());
-        claims.put("role", user.getRole());
+        claims.put("role", "ROLE_" + user.getRole().toString());
 
         return Jwts.builder()
                 .claims(claims)

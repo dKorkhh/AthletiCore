@@ -3,6 +3,7 @@ package com.example.athleticore.service.impl.auth;
 import com.example.athleticore.dto.auth.CredentialDto;
 import com.example.athleticore.dto.user.UserDto;
 import com.example.athleticore.entity.users.User;
+import com.example.athleticore.enums.Role;
 import com.example.athleticore.exception.data.InvalidRefreshTokenException;
 import com.example.athleticore.exception.user.NoSuchUserException;
 import com.example.athleticore.mapper.UserMapper;

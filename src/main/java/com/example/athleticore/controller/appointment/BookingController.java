@@ -34,19 +34,19 @@ public class BookingController {
 
     //role - user
     @PostMapping("/")
-    @PreAuthorize("hasRole('CLIENT')")
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
     public void createBooking(@Valid @RequestBody BookingDto bookingDto){
         //make booking and connecting to existing session
     }
 
     @PatchMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
     public void updateBooking(@PathVariable Long id, @RequestBody UpdateBookingFields updateBookingFields){
 
     }
 
     @DeleteMapping("/deleteBook")
-    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
     public void cancelBooking(){
 
     }

@@ -2,6 +2,7 @@ package com.example.athleticore.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
@@ -48,9 +49,21 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private Optional<String> getTokenFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader(HttpHeaders.AUTHORIZATION);
-
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return Optional.of(bearerToken.substring(7));
+        }
+
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("accessToken".equals(cookie.getName())) {
+                    String token = cookie.getValue();
+
+                    if (token != null && token.split("\\.").length == 3) {
+                        return Optional.of(token);
+                    }
+                }
+            }
         }
 
         return Optional.empty();
