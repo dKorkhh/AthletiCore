@@ -19,19 +19,9 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void createBooking(BookingDto bookingDto) {
         // save
-        sessionService.incrementSessionCount(bookingDto.getSession());
-        notificationService.subscribeToNotifications(
-                NotificationDto.builder()
-                        .client(bookingDto.getClient())
-                        .session(bookingDto.getSession()).build());
     }
 
     @Override
     public void cancelBooking(BookingDto bookingDto) {
-        sessionService.decrementSessionCount(bookingDto.getSession());
-        notificationService.unsubscribeFromNotifications(
-                NotificationDto.builder()
-                        .client(bookingDto.getClient())
-                        .session(bookingDto.getSession()).build());
     }
 }

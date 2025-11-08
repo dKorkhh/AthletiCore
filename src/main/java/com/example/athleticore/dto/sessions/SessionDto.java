@@ -23,6 +23,7 @@ public class SessionDto {
     @NotNull
     @DateIsNotHolidayValidator
     private LocalDateTime date;
+    private boolean isRepeat;
     private int duration;
     @NotNull
     private UserDto trainer;

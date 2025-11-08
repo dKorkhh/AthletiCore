@@ -26,6 +26,7 @@ spring:
       jwtToken: "8H8L8WT9gIYOW/9dlDIYLuPvsHMTOAoV2cywT8VWX4MsGuGVm5S5+YDWHFv/XyjP"
 
 
+
 springdoc:
   api-docs:
     path: /v3/api-docs
