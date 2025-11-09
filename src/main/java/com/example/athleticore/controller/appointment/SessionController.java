@@ -19,6 +19,7 @@ public class SessionController {
     private final SessionServiceImpl sessionService;
 
     @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
     public String getSession(Model model) {
         model.addAttribute("trainingSessions", sessionService.getSessions());
         return "session/CatalogSession";
@@ -26,6 +27,7 @@ public class SessionController {
 
     @GetMapping("/{idUser}")
     @PreAuthorize("hasAnyRole('ADMIN', 'TRAINER')")
+    @ResponseStatus(HttpStatus.OK)
     public void getSessionByUser(@PathVariable Long idUser){
         //return session.getVyId();
     }
