@@ -1,8 +1,10 @@
 package com.example.athleticore.dto.calendar;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class HolidayDto {
     private String date;
     private String localName;
