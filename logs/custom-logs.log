@@ -1,3 +1,46 @@
+{"timestamp":"1762289161707","level":"INFO","thread":"background-preinit","message":"HV000001: Hibernate Validator 8.0.3.Final"}
+{"timestamp":"1762289161732","level":"INFO","thread":"main","message":"Starting AthletiCoreApplication using Java 22.0.2 with PID 30292 (/Users/arinamcnulty/IdeaProjects/AthletiCore/target/classes started by arinamcnulty in /Users/arinamcnulty/IdeaProjects/AthletiCore)"}
+{"timestamp":"1762289161734","level":"INFO","thread":"main","message":"No active profile set, falling back to 1 default profile: "default""}
+{"timestamp":"1762289162194","level":"INFO","thread":"main","message":"Bootstrapping Spring Data JPA repositories in DEFAULT mode."}
+{"timestamp":"1762289162232","level":"INFO","thread":"main","message":"Finished Spring Data repository scanning in 32 ms. Found 4 JPA repository interfaces."}
+{"timestamp":"1762289162543","level":"INFO","thread":"main","message":"Tomcat initialized with port 8080 (http)"}
+{"timestamp":"1762289162551","level":"INFO","thread":"main","message":"Initializing ProtocolHandler ["http-nio-8080"]"}
+{"timestamp":"1762289162552","level":"INFO","thread":"main","message":"Starting service [Tomcat]"}
+{"timestamp":"1762289162553","level":"INFO","thread":"main","message":"Starting Servlet engine: [Apache Tomcat/10.1.44]"}
+{"timestamp":"1762289162574","level":"INFO","thread":"main","message":"Initializing Spring embedded WebApplicationContext"}
+{"timestamp":"1762289162575","level":"INFO","thread":"main","message":"Root WebApplicationContext: initialization completed in 815 ms"}
+{"timestamp":"1762289162652","level":"INFO","thread":"main","message":"HikariPool-1 - Starting..."}
+{"timestamp":"1762289162750","level":"INFO","thread":"main","message":"HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:mydb user=SA"}
+{"timestamp":"1762289162751","level":"INFO","thread":"main","message":"HikariPool-1 - Start completed."}
+{"timestamp":"1762289162827","level":"INFO","thread":"main","message":"HHH000204: Processing PersistenceUnitInfo [name: default]"}
+{"timestamp":"1762289162863","level":"INFO","thread":"main","message":"HHH000412: Hibernate ORM core version 6.6.26.Final"}
+{"timestamp":"1762289162882","level":"INFO","thread":"main","message":"HHH000026: Second-level cache disabled"}
+{"timestamp":"1762289163016","level":"INFO","thread":"main","message":"No LoadTimeWeaver setup: ignoring JPA class transformer"}
+{"timestamp":"1762289163041","level":"WARN","thread":"main","message":"HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)"}
+{"timestamp":"1762289163049","level":"INFO","thread":"main","message":"HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown"}
+{"timestamp":"1762289163559","level":"INFO","thread":"main","message":"HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)"}
+{"timestamp":"1762289163561","level":"INFO","thread":"main","message":"Initialized JPA EntityManagerFactory for persistence unit 'default'"}
+{"timestamp":"1762289163842","level":"WARN","thread":"main","message":"spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning"}
+{"timestamp":"1762289163863","level":"INFO","thread":"main","message":"Adding welcome page template: index"}
+{"timestamp":"1762289164259","level":"INFO","thread":"main","message":"H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:mydb'"}
+{"timestamp":"1762289164306","level":"INFO","thread":"main","message":"Starting ProtocolHandler ["http-nio-8080"]"}
+{"timestamp":"1762289164316","level":"INFO","thread":"main","message":"Tomcat started on port 8080 (http) with context path '/'"}
+{"timestamp":"1762289164322","level":"INFO","thread":"main","message":"Started AthletiCoreApplication in 2.787 seconds (process running for 3.366)"}
+{"timestamp":"1762289445569","level":"INFO","thread":"http-nio-8080-exec-1","message":"Initializing Spring DispatcherServlet 'dispatcherServlet'"}
+{"timestamp":"1762289445570","level":"INFO","thread":"http-nio-8080-exec-1","message":"Initializing Servlet 'dispatcherServlet'"}
+{"timestamp":"1762289445574","level":"INFO","thread":"http-nio-8080-exec-1","message":"Completed initialization in 4 ms"}
+{"timestamp":"1762290018192","level":"INFO","thread":"SpringApplicationShutdownHook","message":"Commencing graceful shutdown. Waiting for active requests to complete"}
+{"timestamp":"1762290018198","level":"INFO","thread":"tomcat-shutdown","message":"Graceful shutdown complete"}
+{"timestamp":"1762290018204","level":"INFO","thread":"SpringApplicationShutdownHook","message":"Closing JPA EntityManagerFactory for persistence unit 'default'"}
+{"timestamp":"1762290018209","level":"INFO","thread":"SpringApplicationShutdownHook","message":"HikariPool-1 - Shutdown initiated..."}
+{"timestamp":"1762290018216","level":"INFO","thread":"SpringApplicationShutdownHook","message":"HikariPool-1 - Shutdown completed."}
 {"timestamp":"1761725549181","level":"INFO","thread":"background-preinit","message":"HV000001: Hibernate Validator 8.0.3.Final"}
 {"timestamp":"1761725549365","level":"INFO","thread":"main","message":"Starting AthletiCoreApplication using Java 21.0.8 with PID 20248 (C:\Users\dana.mushchenko\IdeaProjects\AthletiCore\target\classes started by dana.mushchenko in C:\Users\dana.mushchenko\IdeaProjects\AthletiCore)"}
 {"timestamp":"1761725549384","level":"INFO","thread":"main","message":"No active profile set, falling back to 1 default profile: "default""}
