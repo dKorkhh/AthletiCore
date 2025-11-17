@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Athleticore</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+<div th:replace="~{fragment/topbar :: topbar}"></div>
+
+<main>
+    <div class="session-header">
+        <h2>Training Sessions</h2>
+
+        <div sec:authorize="hasRole('ADMIN')">
+            <a class="add-session-btn" th:href="@{/sessions/add}">Add Session</a>
+        </div>
+    </div>
+
+    <div class="session-container">
+        <a class="session-card"
+           th:each="trainingSession : ${trainingSessions}"
+           th:href="@{/api/book/{id}(id=${trainingSession.id})}">
+            <span th:text="${trainingSession.name}">Session</span>
+        </a>
+    </div>
+</main>
+</body>
+</html>
