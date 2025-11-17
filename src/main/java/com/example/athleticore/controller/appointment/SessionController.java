@@ -4,6 +4,7 @@ import com.example.athleticore.dto.sessions.SessionDto;
 import com.example.athleticore.dto.sessions.UpdateSessionFields;
 import com.example.athleticore.entity.Session;
 import com.example.athleticore.service.impl.session.SessionServiceImpl;
+import com.example.athleticore.utils.validation.LimitCallMethod;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ public class SessionController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
+    @LimitCallMethod
     public String getSession(Model model) {
         model.addAttribute("trainingSessions", sessionService.getSessions());
         return "session/CatalogSession";
@@ -35,7 +37,7 @@ public class SessionController {
     //permission - manager(create new repeat session and connects trainer)
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
-    @PreAuthorize("hasRole('CLIENT')")
+    @PreAuthorize("hasRole('ADMIN')")
     public Session createSession(@Valid @RequestBody SessionDto sessionDto){
         return sessionService.createSession(sessionDto);
     }
