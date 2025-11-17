@@ -10,7 +10,6 @@ import com.example.athleticore.repository.SessionRepository;
 import com.example.athleticore.service.SessionService;
 import com.example.athleticore.service.impl.notification.NotificationServiceImpl;
 import com.example.athleticore.service.impl.user.UserServiceImpl;
-import com.example.athleticore.utils.NotifyTrainerOnCreate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +34,6 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    @NotifyTrainerOnCreate
     public Session createSession(SessionDto session) {
         Session sessionEntity = sessionMapper.toSessionEntity(session);
 
