@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class BookingDto {
-    private SessionDto session;
+    private Long sessionId;
     @DateIsNotHolidayValidator
     private LocalDateTime date;
 }

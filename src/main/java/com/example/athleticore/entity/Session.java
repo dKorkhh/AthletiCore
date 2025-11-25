@@ -9,6 +9,8 @@ import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -54,5 +56,8 @@ public class Session {
     @ManyToOne
     @JoinColumn(name = "schedule_id", nullable = true)
     private Schedule schedule;
+
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings = new ArrayList<>();
 }
 
