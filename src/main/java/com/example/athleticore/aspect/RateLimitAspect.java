@@ -19,14 +19,10 @@ public class RateLimitAspect {
 
     private static final int LIMIT = 10;
     private static final long TIME_WINDOW = 60_000L;
-    private static final String ANONYMOUS_USER = "anonymous";
 
     @Around("@annotation(com.example.athleticore.utils.validation.LimitCallMethod)")
     public Object applyRateLimit(ProceedingJoinPoint pjp) throws Throwable {
         String email = getCurrentUserEmail();
-        if (email == null) {
-            email = ANONYMOUS_USER;
-        }
         
         long now = System.currentTimeMillis();
 
