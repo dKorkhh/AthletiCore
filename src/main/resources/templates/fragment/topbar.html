@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Bar Fragment</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/styles.css">
+</head>
+<body>
+
+<div th:fragment="topbar" class="top-bar">
+    <div class="logo">MyApp</div>
+    <nav>
+        <a href="/" th:href="@{/}">Home</a>
+
+        <span sec:authorize="!isAuthenticated()">
+            <a href="/api/auth/login" th:href="@{/api/auth/login}">Login</a>
+            <a href="/api/auth/register" th:href="@{/api/auth/register}">Sing up</a>
+        </span>
+
+        <span sec:authorize="isAuthenticated()">
+            <a href="/account" th:href="@{/account}">Account</a>
+            <a href="/api/auth/logout" th:href="@{/api/auth/logout}">Log out</a>
+        </span>
+    </nav>
+</div>
+
+</body>
+</html>
