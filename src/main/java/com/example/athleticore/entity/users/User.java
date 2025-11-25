@@ -1,6 +1,7 @@
 package com.example.athleticore.entity.users;
 
 import com.example.athleticore.dto.user.FullName;
+import com.example.athleticore.entity.Booking;
 import com.example.athleticore.entity.Notification;
 import com.example.athleticore.entity.Schedule;
 import com.example.athleticore.enums.Category;
@@ -8,7 +9,9 @@ import com.example.athleticore.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Table(name = "users")
@@ -44,5 +47,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "notification_id")
     )
     private Set<Notification> notifications = new HashSet<>();
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings = new ArrayList<>();
 }
 
