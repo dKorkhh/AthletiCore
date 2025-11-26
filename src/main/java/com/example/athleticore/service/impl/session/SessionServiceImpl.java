@@ -8,10 +8,11 @@ import com.example.athleticore.exception.user.NoSuchUserException;
 import com.example.athleticore.mapper.SessionMapper;
 import com.example.athleticore.repository.SessionRepository;
 import com.example.athleticore.service.SessionService;
-import com.example.athleticore.service.impl.notification.NotificationServiceImpl;
 import com.example.athleticore.service.impl.user.UserServiceImpl;
 import com.example.athleticore.utils.NotifyTrainerOnCreate;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SessionServiceImpl implements SessionService {
-    private final NotificationServiceImpl notificationService;
     private final UserServiceImpl userService;
     private final SessionRepository sessionRepository;
     private final SessionMapper sessionMapper;
@@ -36,6 +36,7 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     @NotifyTrainerOnCreate
+    @CacheEvict("sessions")
     public Session createSession(SessionDto session) {
         Session sessionEntity = sessionMapper.toSessionEntity(session);
 
@@ -48,6 +49,7 @@ public class SessionServiceImpl implements SessionService {
         return sessionEntity;
     }
 
+    @Cacheable("sessions")
     @Override
     public List<Session> getSessions() {
         return sessionRepository.findAll();
