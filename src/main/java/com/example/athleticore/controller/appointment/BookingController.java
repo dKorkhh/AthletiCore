@@ -32,17 +32,16 @@ public class BookingController {
     }
 
     @GetMapping("/{sessionId}")
-    //@PreAuthorize("hasRole('ROLE_CLIENT')")
-    public String showBookingPage(@PathVariable Long sessionId, Model model){
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
+    public String showPageToBookSession(@PathVariable Long sessionId, Model model){
         Session session = sessionService.getSessionById(sessionId);
         model.addAttribute("trainingSession", session);
 
         return "booking/bookingPage";
     }
 
-    //role - userF
     @PostMapping("/{sessionId}")
-    //@PreAuthorize("hasRole('ROLE_CLIENT')")
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
     public String createBooking(@PathVariable Long sessionId, Model model){
         BookingResponseDTO booking = bookingService.createBooking(sessionId);
         model.addAttribute("booking", booking);

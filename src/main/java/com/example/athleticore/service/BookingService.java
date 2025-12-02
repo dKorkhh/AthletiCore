@@ -12,5 +12,5 @@ public interface BookingService {
     public List<Booking> getAllBooking();
     List<Booking> findBookingsByCurrentUser();
     List<Booking> findBookingsBySessionId(Long id);
-    void deleteBookingBySessionId(Long id);
+    List<Booking> getAllBookingWithSession();
 }
