@@ -1,11 +1,8 @@
 package com.example.athleticore.service.impl.notification;
 
-import com.example.athleticore.dto.NotificationDto;
-import com.example.athleticore.dto.user.UserDto;
 import com.example.athleticore.entity.Booking;
 import com.example.athleticore.entity.Session;
 import com.example.athleticore.entity.users.User;
-import com.example.athleticore.mapper.UserMapper;
 import com.example.athleticore.service.NotificationService;
 import com.example.athleticore.service.impl.session.BookingServiceImpl;
 import com.example.athleticore.service.impl.user.UserServiceImpl;
@@ -32,7 +29,7 @@ public class NotificationServiceImpl implements NotificationService {
     public void sendNotification(User client, String messageText) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(client.getEmail());
-        message.setSubject("Registration");
+        message.setSubject("AthletiCore");
         message.setText(messageText);
 
         mailSender.send(message);

@@ -4,24 +4,60 @@
     <meta charset="UTF-8">
     <title>Деталі тренування</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/session-details.css}" />
 </head>
 <body>
 <div th:replace="~{fragment/topbar :: topbar}"></div>
 
-<main>
-    <h2 th:text="${session.name}"></h2>
+<main class="session-details-page">
 
-    <p><b>Дата:</b> <span th:text="${session.date}"></span></p>
-    <p><b>Максимум місць:</b> <span th:text="${session.maxParticipants}"></span></p>
+    <h1 class="session-title" th:text="${trainingSession.name}"></h1>
 
-    <h3>Список клієнтів</h3>
+    <div class="session-layout">
 
-    <ul>
-        <li th:each="b : ${bookings}">
-            <span th:text="${b.client.fullName.lastName + ' ' + b.client.fullName.firstName}"></span>
-            (статус:<span th:text="${b.bookingStatus}"></span>)
-        </li>
-    </ul>
+        <div class="session-info-block">
+            <p><b>Дата:</b> <span th:text="${trainingSession.date}"></span></p>
+            <p><b>Тривалість:</b> <span th:text="${trainingSession.duration}"></span> хв</p>
+            <p><b>Категорія:</b> <span th:text="${trainingSession.category}"></span></p>
+            <p><b>Складність:</b> <span th:text="${trainingSession.difficulty}"></span></p>
+            <p><b>Макс. місць:</b> <span th:text="${trainingSession.maxParticipants}"></span></p>
+            <p><b>Тренер:</b>
+                <span th:if="${trainingSession.trainer != null}"
+                      th:text="${trainingSession.trainer.fullName.firstName + ' ' + trainingSession.trainer.fullName.lastName}">
+                </span>
+                <span th:unless="${trainingSession.trainer != null}">Не вказано</span>
+            </p>
+        </div>
+
+        <div class="session-desc-block">
+            <h3>Опис тренування</h3>
+            <p th:text="${trainingSession.description}"></p>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="bookings-section">
+        <h2>Записані клієнти</h2>
+
+        <table class="clients-table">
+            <thead>
+            <tr>
+                <th>Ім’я</th>
+                <th>Статус</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="b : ${bookings}">
+                <td th:text="${b.client.fullName.lastName + ' ' + b.client.fullName.firstName}"></td>
+                <td th:text="${b.bookingStatus}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 </main>
 </body>
 </html>

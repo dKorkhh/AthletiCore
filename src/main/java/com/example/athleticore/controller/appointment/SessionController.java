@@ -1,5 +1,6 @@
 package com.example.athleticore.controller.appointment;
 
+import com.example.athleticore.dto.PageResponse;
 import com.example.athleticore.dto.sessions.SessionDto;
 import com.example.athleticore.entity.Booking;
 import com.example.athleticore.entity.Session;
@@ -8,6 +9,7 @@ import com.example.athleticore.enums.Category;
 import com.example.athleticore.enums.Difficulty;
 import com.example.athleticore.enums.Role;
 import com.example.athleticore.enums.SessionType;
+import com.example.athleticore.exception.limit.SessionTimeOutOfRangeException;
 import com.example.athleticore.service.impl.session.BookingServiceImpl;
 import com.example.athleticore.service.impl.session.SessionServiceImpl;
 import com.example.athleticore.service.impl.user.UserServiceImpl;
@@ -21,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -31,26 +34,35 @@ public class SessionController {
     private final UserServiceImpl userService;
     private final BookingServiceImpl bookingService;
 
-    @GetMapping()
+    @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     @LimitCallMethod
-    public String getSession(Model model) {
-        User currentUser = userService.getCurrentUser();
-        Role currentuserRole = currentUser.getRole();
-        List<Session> sessions;
+    public String getSession(Model model,
+                             @RequestParam(defaultValue = "0") int page,
+                             @RequestParam(defaultValue = "10") int size,
+                             @RequestParam(defaultValue = "date,asc") String sort) {
 
-        if (currentuserRole == Role.ADMIN) {
-            sessions = sessionService.getSessions();
-            model.addAttribute("trainingSessions", sessions);
+        User currentUser = userService.getCurrentUser();
+        Role role = currentUser.getRole();
+
+        PageResponse<Session> response;
+
+        if (role == Role.ADMIN) {
+            response = sessionService.getSessionsPage(page, size, sort);
+            model.addAttribute("trainingSessions", response.getContent());
+            model.addAttribute("page", response);
             return "session/admin-session";
-        }
-        else if (currentuserRole == Role.TRAINER) {
-            sessions = sessionService.getSessionByTrainer(currentUser);
-            model.addAttribute("trainingSessions", sessions);
+
+        } else if (role == Role.TRAINER) {
+            response = sessionService.getSessionsByTrainerPage(currentUser, page, size, sort);
+            model.addAttribute("trainingSessions", response.getContent());
+            model.addAttribute("page", response);
             return "session/trainer-session";
-        }
-        else {
-            model.addAttribute("trainingSessions", sessionService.getSessions());
+
+        } else {
+            response = sessionService.getSessionsPage(page, size, sort);
+            model.addAttribute("trainingSessions", response.getContent());
+            model.addAttribute("page", response);
             return "session/CatalogSession";
         }
     }
@@ -61,7 +73,7 @@ public class SessionController {
         Session session = sessionService.getSessionById(id);
         List<Booking> bookings = bookingService.findBookingsBySessionId(session.getId());
 
-        model.addAttribute("session", session);
+        model.addAttribute("trainingSession", session);
         model.addAttribute("bookings", bookings);
         return "session/session-details";
     }
@@ -81,16 +93,24 @@ public class SessionController {
     }
 
     @PostMapping("/add")
-    @ResponseStatus(code = HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN')")
-    public Session createSession(@Valid @RequestBody SessionDto sessionDto){
-        return sessionService.createSession(sessionDto);
+    public String add(@ModelAttribute SessionDto sessionDto, Model model) {
+        try {
+            sessionService.createSession(sessionDto);
+            return "redirect:/api/sessions";
+        }
+        catch (SessionTimeOutOfRangeException ex) {
+            model.addAttribute("errorMessage", ex.getMessage());
+            model.addAttribute("session", sessionDto);
+
+            return "session/add-session";
+        }
     }
 
     @GetMapping("/edit/{id}")
     public String editSessionForm(@PathVariable Long id, Model model) {
-
         SessionDto dto = sessionService.getSessionDtoById(id);
+        dto.setFormattedDate(dto.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
 
         model.addAttribute("sessionDto", dto);
         model.addAttribute("sessionId", id);
@@ -106,11 +126,12 @@ public class SessionController {
     @PatchMapping("/edit/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String updateSession(@PathVariable Long id,
-                              @ModelAttribute("sessionDto") @Valid SessionDto sessionDto,
-                              BindingResult result,
-                              Model model){
+                                @Valid @ModelAttribute("sessionDto") SessionDto sessionDto,
+                                BindingResult result,
+                                Model model){
         if (result.hasErrors()) {
-
+            sessionDto.setFormattedDate(sessionDto.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
+            model.addAttribute("sessionDto", sessionDto);
             model.addAttribute("sessionTypes", SessionType.values());
             model.addAttribute("categories", Category.values());
             model.addAttribute("difficulties", Difficulty.values());
@@ -120,8 +141,15 @@ public class SessionController {
             return "session/edit-session";
         }
 
-        sessionService.updateSession(id, sessionDto);
-        return "redirect:/api/sessions";
+        try {
+            sessionService.updateSession(id, sessionDto);
+            return "redirect:/api/sessions";
+        }
+        catch (SessionTimeOutOfRangeException ex) {
+            model.addAttribute("errorMessage", ex.getMessage());
+            model.addAttribute("session", sessionDto);
+            return "session/edit-session";
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")

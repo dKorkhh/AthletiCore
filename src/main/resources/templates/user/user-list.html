@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Користувачі – Admin</title>
+    <link rel="stylesheet" th:href="@{/css/admin-users.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div th:replace="~{fragment/topbar :: topbar}"></div>
+
+<main class="admin-users-page">
+
+    <div style="display: flex; flex-direction: row">
+        <h1>Тренера</h1>
+
+        <div class="top-actions" th:if="${isTrainerPage}">
+            <a class="add-btn" th:href="@{/api/trainers/create}">Додати тренера</a>
+        </div>
+    </div>
+
+    <table class="users-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ім’я</th>
+            <th>Email</th>
+            <th>Роль</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.fullName}"></td>
+            <td th:text="${u.email}"></td>
+            <td th:text="${u.role}"></td>
+
+            <td>
+                <form th:action="@{'/api/clients/' + ${u.id}}" method="post"
+                      th:if="${u.role.name() == 'CLIENT'}">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button class="delete-btn">Видалити</button>
+                </form>
+
+                <form th:action="@{'/api/trainers/' + ${u.id}}" method="post"
+                      th:if="${u.role.name() == 'TRAINER'}">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button class="delete-btn">Видалити</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:replace="fragment/pagination :: paginator(page=${page})"></div>
+
+
+</main>
+
+</body>
+</html>

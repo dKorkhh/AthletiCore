@@ -20,14 +20,14 @@
             <input type="hidden" name="_method" value="patch"/>
 
             <label>Назва тренування</label>
-            <input type="text" th:field="*{name}" placeholder="Наприклад: Cardio Mix">
-            <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            <input type="text" th:field="*{name}" placeholder="Наприклад: Cardio Mix" required>
+            <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" ></div>
 
             <label>Опис</label>
-            <textarea th:field="*{description}" placeholder="Опис (необов'язково)"></textarea>
+            <textarea th:field="*{description}" placeholder="Опис (необов'язково)" required></textarea>
 
             <label>Тип тренування</label>
-            <select th:field="*{sessionType}">
+            <select th:field="*{sessionType}" required>
                 <option th:each="t : ${sessionTypes}"
                         th:value="${t}"
                         th:text="${t}"
@@ -35,8 +35,13 @@
                 </option>
             </select>
 
+            <input type="datetime-local" value="???" hidden="hidden">
+
             <label>Дата та час</label>
-            <input type="datetime-local" th:field="*{date}">
+            <input type="datetime-local"
+                   name="date"
+                   th:value="${#temporals.format(sessionDto.date, 'yyyy-MM-dd''T''HH:mm')}"
+                   required>
             <div class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
 
             <label class="checkbox-label">
@@ -46,10 +51,10 @@
             </label>
 
             <label>Тривалість (хв)</label>
-            <input type="number" th:field="*{duration}" min="5">
+            <input type="number" th:field="*{duration}" min="5" required>
 
             <label>Тренер</label>
-            <select th:field="*{trainerId}">
+            <select th:field="*{trainerId}" required>
                 <option th:each="u : ${trainers}"
                         th:value="${u.id}"
                         th:text="${u.fullName}">
@@ -57,7 +62,7 @@
             </select>
 
             <label>Категорія</label>
-            <select th:field="*{category}">
+            <select th:field="*{category}" required>
                 <option th:each="c : ${categories}"
                         th:value="${c}"
                         th:text="${c}"
@@ -66,7 +71,7 @@
             </select>
 
             <label>Складність</label>
-            <select th:field="*{difficulty}">
+            <select th:field="*{difficulty}" required>
                 <option th:each="d : ${difficulties}"
                         th:value="${d}"
                         th:text="${d}"
@@ -75,11 +80,15 @@
             </select>
 
             <label>Макс. учасників</label>
-            <input type="number" th:field="*{maxParticipants}" min="1">
+            <input type="number" th:field="*{maxParticipants}" min="1" required>
 
             <button type="submit" class="primary-btn">Оновити</button>
 
         </form>
+
+        <div th:if="${errorMessage}" class="error-banner">
+            <p th:text="${errorMessage}"></p>
+        </div>
 
     </main>
 </body>

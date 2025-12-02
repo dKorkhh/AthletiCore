@@ -4,10 +4,12 @@ import com.example.athleticore.entity.Session;
 import lombok.Data;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 @Data
 public class WeekScheduleDto {
     private Map<DayOfWeek, List<Session>> sessionsByDay;
+    private LocalDate startOfWeek;
 }

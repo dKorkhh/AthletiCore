@@ -14,7 +14,9 @@
     <div class="register-container">
         <h2 class="register-title">Create account</h2>
 
-        <form th:action="@{/api/auth/register}" th:object="${userDto}" method="post">
+        <form th:action="${isTrainer} ? @{/api/trainers/register} : @{/api/auth/register}"
+              th:object="${userDto}"
+              method="post">
 
             <div class="form-group">
                 <label for="firstName">FirstName *</label>

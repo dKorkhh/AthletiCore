@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+
+<body>
+
+<div th:fragment="paginator(page)">
+    <div class="pagination" th:if="${page.totalPages > 1}">
+
+        <a th:if="${!page.first}"
+           th:href="@{|?page=${page.page - 1}&size=${page.size}&sort=id,asc|}"
+           class="page-btn">
+            ← Попередня
+        </a>
+
+        <span th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+            <a th:href="@{|?page=${i}&size=${page.size}&sort=id,asc|}"
+               th:text="${i + 1}"
+               th:class="${i == page.page} ? 'page-number active' : 'page-number'">
+            </a>
+        </span>
+
+        <a th:if="${!page.last}"
+           th:href="@{|?page=${page.page + 1}&size=${page.size}&sort=id,asc|}"
+           class="page-btn">
+            Наступна →
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>

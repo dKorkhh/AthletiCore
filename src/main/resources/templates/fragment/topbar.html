@@ -20,9 +20,24 @@
         </span>
 
         <span sec:authorize="isAuthenticated()">
-            <a href="/api/schedule" th:href="@{/api/schedule}">Schedule</a>
-            <a href="/account" th:href="@{/api/account}">Account</a>
-            <a href="/api/auth/logout" th:href="@{/api/auth/logout}">Log out</a>
+            <span sec:authorize="hasRole('ROLE_TRAINER')">
+                <a href="/api/schedule" th:href="@{/api/schedule}">Schedule</a>
+            </span>
+            <span sec:authorize="hasRole('ROLE_CLIENT')">
+                <a href="/api/account" th:href="@{/api/account}">Account</a>
+            </span>
+            <span sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="/api/clients" th:href="@{/api/clients}">Clients</a>
+            </span>
+            <span sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="/api/trainers" th:href="@{/api/trainers}">Trainers</a>
+            </span>
+            <span sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="/api/sessions" th:href="@{/api/sessions}">Sessions</a>
+            </span>
+            <span>
+                <a href="/api/auth/logout" th:href="@{/api/auth/logout}">Log out</a>
+            </span>
         </span>
     </nav>
 </div>

@@ -1,0 +1,174 @@
+.account-bookings-page {
+    max-width: 1200px;
+    margin: 2.5rem auto;
+    padding: 0 2rem;
+}
+
+.page-title {
+    font-size: 2.3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2.5rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    background: #faf7ff;
+    border-radius: 12px;
+    border-left: 6px solid #9667E0;
+}
+
+.empty-state h3 {
+    font-size: 1.6rem;
+}
+
+.bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+.booking-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.8rem;
+    border-radius: 14px;
+    background: #ffffffd9;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(150,103,224,0.15);
+    box-shadow: 0 4px 16px rgba(150,103,224,0.15);
+}
+
+.training-name {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    font-weight: bold;
+}
+
+.booking-main p {
+    margin: 0.4rem 0;
+    font-size: 1.05rem;
+}
+
+.desc {
+    margin-top: 1rem;
+    color: #444;
+    line-height: 1.4;
+}
+
+.booking-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+
+.status-badge.active {
+    background: #4caf50;
+}
+
+.status-badge.canceled {
+    background: #d32f2f;
+}
+
+.cancel-btn {
+    padding: 0.6rem 1.2rem;
+    background: #9667E0;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cancel-btn:hover {
+    background: #7c52d6;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 14px;
+    width: 380px;
+    text-align: center;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+}
+
+.confirm-btn {
+    margin-top: 1rem;
+    padding: 0.8rem 1.4rem;
+    background: #d32f2f;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.confirm-btn:hover {
+    background: #b71c1c;
+}
+
+.close-btn {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background: #777;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.status-badge.confirmed {
+    background: #d4ffe5;
+    color: #047a36;
+}
+
+.status-badge.canceled {
+    background: #ffe3e3;
+    color: #b90000;
+}
+
+.status-badge.pending {
+    background: #fff4c4;
+    color: #8a6d00;
+}

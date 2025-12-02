@@ -1,0 +1,92 @@
+.admin-users-page {
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.admin-users-page h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.users-table th {
+    background: #9667E0;
+    color: #fff;
+    padding: 12px;
+    text-align: left;
+}
+
+.users-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.delete-btn {
+    background: #d32f2f;
+    border: none;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.delete-btn:hover {
+    background: #b71c1c;
+}
+
+/* === Pagination === */
+.pagination {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.page-btn,
+.page-number {
+    padding: 6px 12px;
+    background: #eee;
+    border-radius: 6px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.page-btn:hover,
+.page-number:hover {
+    background: #dcdcdc;
+}
+
+.page-number.active {
+    background: #9667E0;
+    color: #fff;
+    box-shadow: 0 0 6px rgba(150,103,224,0.5);
+}
+
+.top-actions {
+    margin: 1rem 0 2rem 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-btn {
+    background: #000;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.add-btn:hover {
+    background: #333;
+}

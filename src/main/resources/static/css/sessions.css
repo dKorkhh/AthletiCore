@@ -1,0 +1,79 @@
+.sessions-page .sessions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.sessions-page .session-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.5rem;
+    cursor: pointer;
+    border: 1px solid rgba(150,103,224,0.15);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    transition: 0.25s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 270px;
+}
+
+.sessions-page .session-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(150,103,224,0.3);
+}
+
+.sessions-page .difficulty-tag {
+    background: #9667E0;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    width: fit-content;
+    margin-bottom: 0.5rem;
+}
+
+.sessions-page .session-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #222;
+    margin: 0.3rem 0;
+}
+
+.sessions-page .session-desc {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0.5rem 0 1rem;
+    min-height: 38px;
+}
+
+.sessions-page .session-info-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 1rem;
+    color: #1b1b1b;
+}
+
+.sessions-page .line {
+    font-size: 0.9rem;
+    display: flex;
+    gap: 6px;
+}
+
+.sessions-page .label {
+    font-weight: bold;
+    color: #444;
+}
+
+.sessions-page .participants {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}

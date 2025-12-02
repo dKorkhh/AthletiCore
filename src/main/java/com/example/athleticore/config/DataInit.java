@@ -10,7 +10,6 @@ import com.example.athleticore.repository.BookingRepository;
 import com.example.athleticore.repository.ScheduleRepository;
 import com.example.athleticore.repository.SessionRepository;
 import com.example.athleticore.repository.UserRepository;
-import com.example.athleticore.service.impl.schedule.ScheduleServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -81,7 +80,7 @@ public class DataInit implements CommandLineRunner {
 
         userRepository.save(user);
 
-        User trainer1 = trainers.get(0);
+        User trainer1 = trainers.getFirst();
         Schedule schedule1 = trainer1.getSchedule();
 
         List<Session> trainer1Sessions = List.of(
@@ -167,8 +166,8 @@ public class DataInit implements CommandLineRunner {
 
         sessionRepository.saveAll(trainer2Sessions);
 
-        User c1 = clients.get(0); // id=3
-        User c2 = clients.get(1); // id=4
+        User c1 = clients.get(0);
+        User c2 = clients.get(1);
 
         bookingRepository.save(new Booking(null, c1, trainer1Sessions.get(0), BookingStatus.CONFIRMED));
         bookingRepository.save(new Booking(null, c2, trainer1Sessions.get(1), BookingStatus.CONFIRMED));

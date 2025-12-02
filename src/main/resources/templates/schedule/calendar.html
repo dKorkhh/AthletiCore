@@ -1,36 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Календар тренера</title>
-    <link rel="stylesheet" th:href="@{/css/calendar.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
 
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/calendar.css}">
 </head>
+
 <body>
 
 <div th:replace="~{fragment/topbar :: topbar}"></div>
 
 <main class="calendar-wrapper calendar-page">
 
-  <h2 class="calendar-title">Розклад тренера</h2>
+    <h2 class="calendar-title">Розклад тренера</h2>
 
-  <div class="calendar-grid">
+    <div class="week-nav">
 
-      <div class="day-column" th:each="entry : ${week.sessionsByDay}">
-          <div class="day-title" th:text="${entry.key}">Monday</div>
+        <a class="nav-btn"
+           th:href="@{|/api/schedule?start=${startDate.minusDays(7)}|}">
+            ← Попередній тиждень
+        </a>
 
-          <div class="day-body">
-              <div class="session-block"
-                   th:each="s : ${entry.value}"
-                   th:style="'top:' + ${(s.date.hour - 8) * 60 + s.date.minute} + 'px;'">
-                  <b th:text="${s.name}"></b>
-                  <span th:text="${#temporals.format(s.date,'HH:mm')}"></span>
-              </div>
-          </div>
-      </div>
+        <div class="week-range">
+            <span th:text="${#temporals.format(startDate, 'dd.MM.yyyy')}"></span>
+            –
+            <span th:text="${#temporals.format(startDate.plusDays(6), 'dd.MM.yyyy')}"></span>
+        </div>
 
-  </div>
+        <a class="nav-btn"
+           th:href="@{|/api/schedule?start=${startDate.plusDays(7)}|}">
+            Наступний тиждень →
+        </a>
+
+    </div>
+
+
+    <div class="calendar-grid">
+
+        <div class="day-column" th:each="entry : ${week.sessionsByDay}">
+            <div class="day-title" th:text="${entry.key}">Monday</div>
+
+            <div class="day-body">
+
+                <div class="session-block"
+                     th:each="s : ${entry.value}"
+                     th:style="${'top:' + ((#temporals.hour(s.date) - 8) * 60 + #temporals.minute(s.date)) + 'px;'}">
+                    <b th:text="${s.name}"></b>
+                    <span th:text="${#temporals.format(s.date,'HH:mm')}"></span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 
 </main>
 

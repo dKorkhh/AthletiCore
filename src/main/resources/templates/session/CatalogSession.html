@@ -5,28 +5,64 @@
     <meta charset="UTF-8">
     <title>Athleticore</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/sessions.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-users.css}">
 </head>
 <body>
-<div th:replace="~{fragment/topbar :: topbar}"></div>
+    <div th:replace="~{fragment/topbar :: topbar}"></div>
 
-<main>
-    <div class="session-header">
-        <h2>Training Sessions</h2>
+    <main class="sessions-page">
 
-        <div sec:authorize="hasRole('ADMIN')">
-            <a class="add-session-btn" th:href="@{/sessions/add}">Add Session</a>
-        </div>
-    </div>
-
-    <div class="session-container">
-        <div th:each="trainingSession : ${trainingSessions}">
-            <a class="session-card"
-               th:href="@{/api/booking/{id}(id=${trainingSession.id})}">
-                <span th:text="${trainingSession.name}"></span>
-            </a>
+        <div class="session-header">
+            <h2>Тренування</h2>
         </div>
 
-    </div>
-</main>
+        <div class="sessions-grid">
+            <div class="session-card"
+                 th:each="s : ${trainingSessions}"
+                 th:onclick="|window.location.href='/api/booking/${s.id}'|">
+
+                <div class="difficulty-tag" th:text="${s.difficulty}"></div>
+
+                <h3 class="session-title" th:text="${s.name}"></h3>
+
+                <p class="session-desc" th:text="${s.description}"></p>
+
+                <div class="session-info-vertical">
+
+                    <div class="line">
+                        <span class="label">Дата:</span>
+                        <span th:text="${#temporals.format(s.date,'dd.MM.yyyy HH:mm')}"></span>
+                    </div>
+
+                    <div class="line">
+                        <span class="label">Тривалість:</span>
+                        <span th:text="${s.duration}"></span> хв
+                    </div>
+
+                    <div class="line">
+                        <span class="label">Категорія:</span>
+                        <span th:text="${s.category}"></span>
+                    </div>
+
+                    <div class="line">
+                        <span class="label">Тренер:</span>
+                        <span th:text="${s.trainer.fullName}"></span>
+                    </div>
+
+                </div>
+
+                <div class="participants">
+                    <span th:text="${s.bookings.size()}"></span> /
+                    <span th:text="${s.maxParticipants}"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div th:replace="fragment/pagination :: paginator(page=${page})"></div>
+
+    </main>
+
 </body>
 </html>

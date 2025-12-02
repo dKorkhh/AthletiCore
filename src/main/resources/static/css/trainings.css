@@ -1,0 +1,87 @@
+.trainings-page {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.page-title {
+    font-size: 2.4rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: #222;
+}
+
+/* Контейнер с тенью */
+.table-wrapper {
+    background: #ffffffba;
+    backdrop-filter: blur(6px);
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(150, 103, 224, 0.15);
+    border: 1px solid rgba(150, 103, 224, 0.15);
+}
+
+/* Таблица */
+.pretty-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pretty-table thead tr {
+    background: #9667E0;
+    color: white;
+}
+
+.pretty-table th,
+.pretty-table td {
+    padding: 1rem;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.pretty-table tbody tr {
+    background: #fafafa;
+    border-bottom: 1px solid #e6e6e6;
+    transition: 0.2s;
+}
+
+.pretty-table tbody tr:hover {
+    background: #f3eaff;
+    transform: translateX(5px);
+}
+
+/* Название тренировки */
+.session-name {
+    font-weight: bold;
+    color: #2c2c2c;
+}
+
+/* Дата */
+.session-date {
+    color: #555;
+}
+
+/* Кол-во мест */
+.session-max {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Кнопка */
+.view-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    background: #9667E0;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(150,103,224,0.3);
+}
+
+.view-btn:hover {
+    background: #7c52d6;
+    box-shadow: 0 0 14px rgba(150,103,224,0.55);
+}

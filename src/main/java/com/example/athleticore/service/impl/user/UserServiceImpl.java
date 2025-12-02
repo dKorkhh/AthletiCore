@@ -1,15 +1,24 @@
 package com.example.athleticore.service.impl.user;
 
+import com.example.athleticore.dto.PageResponse;
 import com.example.athleticore.dto.patch.PatchDto;
 import com.example.athleticore.dto.user.UserDto;
+import com.example.athleticore.entity.Session;
 import com.example.athleticore.entity.users.User;
 import com.example.athleticore.enums.Role;
 import com.example.athleticore.exception.user.NoSuchUserException;
 import com.example.athleticore.mapper.UserMapper;
+import com.example.athleticore.repository.SessionRepository;
 import com.example.athleticore.repository.UserRepository;
+import com.example.athleticore.service.impl.session.SessionServiceImpl;
 import com.example.athleticore.service.user.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,12 +35,23 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final SessionRepository sessionRepository;
 
     @Override
     public User addUser(UserDto userDto) {
         User user = userMapper.toEntity(userDto);
         user.setRole(Role.CLIENT);
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userRepository.save(user);
+
+        return user;
+    }
+
+    @Override
+    public User addTrainer(UserDto dto) {
+        User user = userMapper.toEntity(dto);
+        user.setRole(Role.TRAINER);
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepository.save(user);
 
         return user;
@@ -71,8 +91,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUserById(Long id) {
+        List<Session> sessions = sessionRepository.getSessionsByTrainerId(id);
 
+        sessions.forEach(s -> s.setTrainer(null));
+        sessionRepository.saveAll(sessions);
+
+        userRepository.deleteById(id);
     }
 
     @Override
@@ -106,4 +132,42 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"))
                 .getRole();
     }
+
+    public PageResponse<User> getClientsPage(int page, int size, String sort) {
+        Pageable pageable = PageRequest.of(page, size, parseSort(sort));
+
+        Page<User> result = userRepository.findAllByRole(Role.CLIENT, pageable);
+
+        return new PageResponse<>(
+                result.getContent(),
+                result.getNumber(),
+                result.getSize(),
+                result.getTotalElements(),
+                result.getTotalPages(),
+                result.isFirst(),
+                result.isLast()
+        );
+    }
+
+    public PageResponse<User> getTrainersPage(int page, int size, String sort) {
+        Pageable pageable = PageRequest.of(page, size, parseSort(sort));
+
+        Page<User> result = userRepository.findAllByRole(Role.TRAINER, pageable);
+
+        return new PageResponse<>(
+                result.getContent(),
+                result.getNumber(),
+                result.getSize(),
+                result.getTotalElements(),
+                result.getTotalPages(),
+                result.isFirst(),
+                result.isLast()
+        );
+    }
+
+    private Sort parseSort(String sort) {
+        String[] data = sort.split(",");
+        return Sort.by(Sort.Direction.fromString(data[1]), data[0]);
+    }
+
 }

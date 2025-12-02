@@ -3,6 +3,7 @@ package com.example.athleticore.controller.account;
 import com.example.athleticore.entity.Booking;
 import com.example.athleticore.service.impl.session.BookingServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -21,20 +22,11 @@ public class AccountController {
     private final BookingServiceImpl bookingService;
 
     @GetMapping("")
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
     public String getAccountPage(Model model) {
         List<Booking> bookings = bookingService.findBookingsByCurrentUser();
         model.addAttribute("bookings", bookings);
 
         return "account/accountPage";
-    }
-
-    @PostMapping("/cancel")
-    public String cancelBooking(@RequestParam Long bookingId) {
-
-        /*Booking booking = bookingService.findBookingById(bookingId);
-        booking.setBookingStatus(BookingStatus.CANCELLED);
-        bookingService.save(booking);*/
-
-        return "redirect:/account";
     }
 }

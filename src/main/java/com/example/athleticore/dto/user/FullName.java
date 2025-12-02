@@ -3,6 +3,7 @@ package com.example.athleticore.dto.user;
 import jakarta.persistence.Embeddable;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.apache.logging.log4j.util.Strings;
 
 @Embeddable
 @Data
@@ -13,4 +14,9 @@ public class FullName {
     private String firstName;
     private String lastName;
     private String middleName;
+
+    @Override
+    public String toString() {
+        return firstName + ' ' + lastName + ' ' + ((!Strings.isEmpty(middleName)) ?  middleName : "");
+    }
 }

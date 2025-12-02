@@ -1,40 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
   <title>Мої тренування</title>
+
   <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/trainings.css}" />
+  <link rel="stylesheet" th:href="@{/css/admin-users.css}">
 </head>
+
 <body>
+
 <div th:replace="~{fragment/topbar :: topbar}"></div>
 
-<main>
-  <h2>Мої тренування</h2>
+<main class="trainings-page">
+  <h2 class="page-title">Мої тренування</h2>
 
-  <table class="trainer-table">
-    <thead>
-    <tr>
-      <th>Назва</th>
-      <th>Дата</th>
-      <th>Місця</th>
-      <th>Записалось</th>
-      <th></th>
-    </tr>
-    </thead>
+  <div class="table-wrapper">
+    <table class="trainer-table pretty-table">
+      <thead>
+      <tr>
+        <th>Назва</th>
+        <th>Дата</th>
+        <th>Місця</th>
+        <th></th>
+      </tr>
+      </thead>
 
-    <tbody>
-    <tr th:each="s : ${trainingSessions}">
-      <td th:text="${s.name}"></td>
-      <td th:text="${s.date}"></td>
-      <td th:text="${s.maxParticipants}"></td>
+      <tbody>
+      <tr th:each="s : ${trainingSessions}">
+        <td>
+          <span class="session-name" th:text="${s.name}"></span>
+        </td>
 
-      <td>
-        <a th:href="@{/api/sessions/details/{id}(id=${s.id})}" class="view-btn">Показати більше</a>
-      </td>
-    </tr>
-    </tbody>
+        <td>
+          <span class="session-date" th:text="${s.date}"></span>
+        </td>
 
-  </table>
+        <td>
+          <span class="session-max" th:text="${s.maxParticipants}"></span>
+        </td>
+
+        <td class="actions">
+          <a th:href="@{/api/sessions/details/{id}(id=${s.id})}" class="view-btn">
+            Деталі →
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div th:replace="fragment/pagination :: paginator(page=${page})"></div>
+  </div>
+
 </main>
 </body>
 </html>

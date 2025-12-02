@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Book Training</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Запис на тренування</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/book-training.css}" />
 </head>
 
 <body>
 
-<div class="container">
+<div th:replace="~{fragment/topbar :: topbar}"></div>
 
-    <h1>Training Session Details</h1>
+<main class="book-training-page">
 
-    <div class="session-card" th:object="${trainingSession}">
+    <h1 class="page-title">Деталі тренування</h1>
 
-        <p><b>Training:</b> <span th:text="*{name}"></span></p>
-        <p><b>Date:</b> <span th:text="*{date}"></span></p>
-        <form th:action="@{/api/booking/{id}(id=*{id})}" method="post">
-            <button type="submit" class="btn btn-primary">Book now</button>
+    <div class="training-box" th:object="${trainingSession}">
+
+        <div class="training-info">
+            <p><b>Назва:</b> <span th:text="*{name}"></span></p>
+            <p><b>Дата:</b> <span th:text="*{date}"></span></p>
+            <p><b>Тривалість:</b> <span th:text="*{duration}"></span> хв</p>
+            <p><b>Категорія:</b> <span th:text="*{category}"></span></p>
+            <p><b>Складність:</b> <span th:text="*{difficulty}"></span></p>
+            <p><b>Макс. місць:</b> <span th:text="*{maxParticipants}"></span></p>
+        </div>
+
+        <form th:action="@{/api/booking/{id}(id=*{id})}" method="post" class="book-form">
+            <button type="submit" class="book-btn">Записатися</button>
         </form>
+
+        <div th:if="${errorMessage}" class="error-banner">
+            <p th:text="${errorMessage}"></p>
+        </div>
 
     </div>
 
-</div>
+</main>
 
 </body>
 </html>

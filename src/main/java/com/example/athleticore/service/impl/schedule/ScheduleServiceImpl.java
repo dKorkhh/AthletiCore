@@ -5,6 +5,7 @@ import com.example.athleticore.entity.Schedule;
 import com.example.athleticore.entity.Session;
 import com.example.athleticore.entity.users.User;
 import com.example.athleticore.repository.ScheduleRepository;
+import com.example.athleticore.repository.SessionRepository;
 import com.example.athleticore.service.ScheduleService;
 import com.example.athleticore.service.impl.user.UserServiceImpl;
 import jakarta.transaction.Transactional;
@@ -12,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,7 +24,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ScheduleServiceImpl implements ScheduleService {
     private final ScheduleRepository scheduleRepository;
-    private final UserServiceImpl userService;
+    private final SessionRepository sessionRepository;
 
     @Override
     @Transactional
@@ -29,21 +32,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         Long trainerId = session.getTrainer().getId();
 
-        Schedule schedule = scheduleRepository.findByTrainerId(trainerId)
-                .orElseGet(() -> createEmptySchedule(trainerId));
+        List<Schedule> schedules = scheduleRepository.findByTrainerId(trainerId);
 
-        schedule.addSession(session);
+        for (Schedule s : schedules) {
+            s.addSession(session);
+        }
 
-        scheduleRepository.save(schedule);
-    }
-
-    private Schedule createEmptySchedule(Long trainerId) {
-        Schedule schedule = new Schedule();
-        User trainer = userService.getUserById(trainerId);
-
-        schedule.setTrainer(trainer);
-
-        return scheduleRepository.save(schedule);
+        scheduleRepository.saveAll(schedules);
     }
 
     @Transactional
@@ -55,26 +50,62 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
     }
 
-    public WeekScheduleDto getWeekSchedule(Long trainerId) {
+    public WeekScheduleDto getWeekSchedule(Long trainerId, LocalDate startOfWeek) {
 
-        Schedule schedule = scheduleRepository.findByTrainerId(trainerId)
-                .orElseThrow(() -> new RuntimeException("Schedule not found"));
+        LocalDateTime start = startOfWeek.atStartOfDay();
+        LocalDateTime end = start.plusDays(7);
 
-        Map<DayOfWeek, List<Session>> weeklyMap = new LinkedHashMap<>();
+        List<Session> sessions = sessionRepository.findSessionsByTrainerId(trainerId);
+
+        Map<DayOfWeek, List<Session>> map = new LinkedHashMap<>();
 
         for (DayOfWeek day : DayOfWeek.values()) {
-            weeklyMap.put(day, new ArrayList<>());
+            map.put(day, new ArrayList<>());
         }
 
-        schedule.getSessions().forEach(session -> {
-            DayOfWeek day = session.getDate().getDayOfWeek();
-            weeklyMap.get(day).add(session);
-        });
+        for (Session s : sessions) {
+            if (s.isRepeat()) {
+                DayOfWeek targetDay = s.getDate().getDayOfWeek();
+                LocalDate targetDate = startOfWeek.with(targetDay);
+
+                LocalDateTime repeated = LocalDateTime.of(
+                        targetDate,
+                        s.getDate().toLocalTime()
+                );
+
+                Session copied = copySessionWithDate(s, repeated);
+                map.get(targetDay).add(copied);
+            }
+
+            else if (!s.isRepeat() &&
+                    !s.getDate().isBefore(start) &&
+                    !s.getDate().isAfter(end)) {
+
+                map.get(s.getDate().getDayOfWeek()).add(s);
+            }
+        }
 
         WeekScheduleDto dto = new WeekScheduleDto();
-        dto.setSessionsByDay(weeklyMap);
-
+        dto.setSessionsByDay(map);
+        dto.setStartOfWeek(startOfWeek);
         return dto;
     }
 
+
+    private Session copySessionWithDate(Session original, LocalDateTime newDate) {
+        return Session.builder()
+                .id(original.getId())
+                .name(original.getName())
+                .description(original.getDescription())
+                .sessionType(original.getSessionType())
+                .date(newDate)
+                .isRepeat(original.isRepeat())
+                .duration(original.getDuration())
+                .trainer(original.getTrainer())
+                .category(original.getCategory())
+                .difficulty(original.getDifficulty())
+                .maxParticipants(original.getMaxParticipants())
+                .schedule(original.getSchedule())
+                .build();
+    }
 }

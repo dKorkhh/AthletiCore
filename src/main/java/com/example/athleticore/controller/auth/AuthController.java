@@ -65,6 +65,7 @@ public class AuthController {
                     .fullName(FullName.builder().build())
                     .build();
             model.addAttribute("userDto", userDto);
+            model.addAttribute("isTrainer", false);
         }
         return "auth/register";
     }

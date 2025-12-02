@@ -1,0 +1,72 @@
+/* ===== Загальна сторінка ===== */
+.session-details-page {
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    color: #222;
+    font-family: Arial, sans-serif;
+}
+
+/* Назва зверху */
+.session-title {
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+/* Дві колонки */
+.session-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+/* Ліва колонка (інфо) */
+.session-info-block p {
+    margin: 0.7rem 0;
+    font-size: 1.1rem;
+}
+
+/* Права колонка (опис) */
+.session-desc-block h3 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.session-desc-block p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Лінія */
+hr {
+    margin: 3rem 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* Таблиця клієнтів */
+.bookings-section h2 {
+    margin-bottom: 1.2rem;
+}
+
+.clients-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.clients-table th {
+    background: #9667E0;
+    color: white;
+    padding: 12px;
+    font-size: 1.1rem;
+}
+
+.clients-table td {
+    padding: 12px;
+    border: 1px solid #ccc;
+}
+
+.clients-table tr:nth-child(even) {
+    background: #f7f3ff;
+}

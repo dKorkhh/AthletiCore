@@ -1,55 +1,99 @@
 .calendar-page {
-    background: #111;
-    color: #eee;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-}
-
-.calendar-wrapper {
-    padding: 0 20px;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 1rem;
 }
 
 .calendar-title {
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 32px;
-    color: #c8b6ff;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.week-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.week-range {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.nav-btn {
+    padding: 8px 14px;
+    background: #9667E0;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.nav-btn:hover {
+    background: #7d51c9;
+    box-shadow: 0 0 10px rgba(150, 103, 224, .6);
 }
 
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
+    gap: 1rem;
+    padding-bottom: 3rem;
 }
 
 .day-column {
-    background: #1b1b1b;
-    border-left: 1px solid #333;
-    position: relative;
+    background: #f8f8f8;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ddd;
 }
 
 .day-title {
+    background: #1b1b1b;
+    color: white;
     text-align: center;
-    padding: 10px;
-    background: #2b2b2b;
-    border-bottom: 1px solid #333;
+    padding: 0.7rem;
     font-weight: bold;
 }
 
 .day-body {
     position: relative;
-    min-height: 900px;
+    height: 800px; /* 8:00 — 22:00 часовое поле */
+    padding: 5px;
 }
 
 .session-block {
     position: absolute;
-    left: 10px;
-    width: calc(100% - 20px);
-    background: #6933ff;
+    left: 5px;
+    right: 5px;
+    background: #9667E0;
     color: white;
-    border-radius: 6px;
-    padding: 6px 0;
-    font-size: 14px;
-    box-shadow: 0 0 8px rgba(105, 51, 255, 0.4);
-    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(150, 103, 224, .4);
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.session-block:hover {
+    transform: scale(1.03);
+}
+
+.session-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.session-time {
+    font-size: 0.9rem;
+}
+
+.session-repeat {
+    margin-top: 5px;
+    font-size: .75rem;
+    opacity: 0.9;
 }

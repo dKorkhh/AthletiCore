@@ -28,4 +28,6 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     @Query("SELECT b FROM Booking b JOIN FETCH b.session JOIN FETCH b.client")
     List<Booking> findAllWithSession();
+
+    boolean existsByClientIdAndSessionId(Long clientId, Long sessionId);
 }

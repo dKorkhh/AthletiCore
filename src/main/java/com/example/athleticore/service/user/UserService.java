@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface UserService {
     User addUser(UserDto dto);
+    User addTrainer(UserDto dto);
     User getUserById(Long id);
     List<User> getAllUser();
     List<User> findAllTrainers();

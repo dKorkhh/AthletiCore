@@ -14,6 +14,8 @@ import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Setter
@@ -41,6 +43,7 @@ public class Session {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User trainer;
 
     @Enumerated(EnumType.STRING)

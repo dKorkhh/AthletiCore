@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <title>Керування тренуваннями</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <meta charset="UTF-8">
+  <title>Керування тренуваннями</title>
+
+  <link rel="stylesheet" th:href="@{/css/session-admin.css}">
+  <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+  <link rel="stylesheet" th:href="@{/css/admin-users.css}">
 </head>
 <body>
+
 <div th:replace="~{fragment/topbar :: topbar}"></div>
 
-<main>
-  <h2>Усі тренування</h2>
+<main class="session-admin-container">
 
-  <a class="add-btn" th:href="@{/api/sessions/add}">Додати тренування</a>
+  <div class="session-admin-header">
+    <h2>Усі тренування</h2>
+    <a class="session-admin-add-btn" th:href="@{/api/sessions/add}">
+      + Додати тренування
+    </a>
+  </div>
 
-  <table class="admin-table">
+  <table class="session-admin-table">
     <thead>
     <tr>
       <th>Назва</th>
@@ -27,23 +35,30 @@
     <tbody>
     <tr th:each="s : ${trainingSessions}">
       <td th:text="${s.name}"></td>
-      <td th:text="${s.date}"></td>
+      <td th:text="${#temporals.format(s.date, 'dd.MM.yyyy HH:mm')}"></td>
       <td th:text="${s.trainer.fullName}"></td>
       <td th:text="${s.maxParticipants}"></td>
 
-      <td>
-        <a th:href="@{/api/sessions/edit/{id}(id=${s.id})}" class="edit-btn">Редагувати</a>
+      <td class="session-admin-actions">
+        <a th:href="@{/api/sessions/edit/{id}(id=${s.id})}" class="session-admin-edit">
+          Редагувати
+        </a>
+
         <form th:action="@{/api/sessions/{id}(id=${s.id})}"
               method="post"
-              onsubmit="return confirm('Ви впевнені?')">
-
+              onsubmit="return confirm('Ви впевнені, що хочете видалити?')">
           <input type="hidden" name="_method" value="delete"/>
-          <button type="submit" class="delete-btn">Видалити</button>
+          <button type="submit" class="session-admin-delete">
+            Видалити
+          </button>
         </form>
       </td>
     </tr>
     </tbody>
   </table>
+
+  <div th:replace="fragment/pagination :: paginator(page=${page})"></div>
+
 </main>
 </body>
 </html>

@@ -23,4 +23,5 @@ public interface BookingService {
     List<Booking> findAllById(List<Long> bookingIds);
 
     void saveAll(List<Booking> expired);
+    public void cancelBooking(Long bookingId);
 }

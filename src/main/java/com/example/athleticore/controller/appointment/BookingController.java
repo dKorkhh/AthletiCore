@@ -2,9 +2,9 @@ package com.example.athleticore.controller.appointment;
 
 import com.example.athleticore.dto.bookings.BookingResponseDTO;
 import com.example.athleticore.entity.Booking;
-import com.example.athleticore.dto.bookings.BookingDto;
-import com.example.athleticore.dto.bookings.UpdateBookingFields;
 import com.example.athleticore.entity.Session;
+import com.example.athleticore.exception.limit.AlreadyBookedException;
+import com.example.athleticore.exception.limit.MaxParticipantsReachedException;
 import com.example.athleticore.service.impl.session.BookingServiceImpl;
 import com.example.athleticore.service.impl.session.SessionServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -43,25 +43,25 @@ public class BookingController {
     @PostMapping("/{sessionId}")
     @PreAuthorize("hasRole('ROLE_CLIENT')")
     public String createBooking(@PathVariable Long sessionId, Model model){
-        BookingResponseDTO booking = bookingService.createBooking(sessionId);
-        model.addAttribute("booking", booking);
-        System.out.println(sessionId);
+        try {
+            BookingResponseDTO booking = bookingService.createBooking(sessionId);
+            model.addAttribute("booking", booking);
+            return "booking/booking-success";
+        } catch (AlreadyBookedException | MaxParticipantsReachedException ex) {
 
-        return "booking/booking-success";
+            Session session = sessionService.getSessionById(sessionId);
+
+            model.addAttribute("trainingSession", session);
+            model.addAttribute("errorMessage", ex.getMessage());
+
+            return "booking/bookingPage";
+        }
     }
 
-
-    @PatchMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
-    public void updateBooking(@PathVariable Long id, @RequestBody UpdateBookingFields updateBookingFields){
-
+    @PostMapping("/cancel")
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
+    public String cancelBooking(@RequestParam Long bookingId) {
+        bookingService.cancelBooking(bookingId);
+        return "redirect:/api/account";
     }
-
-    @DeleteMapping("/deleteBook")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
-    public void cancelBooking(){
-
-    }
-
-
 }

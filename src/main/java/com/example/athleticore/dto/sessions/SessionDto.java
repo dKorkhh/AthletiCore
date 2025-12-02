@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 public class SessionDto {
     @NotNull
-    @Size(max = 12)
+    @Size(max = 32)
     private String name;
     @Size(max = 60)
     private String description;
@@ -33,4 +33,5 @@ public class SessionDto {
     @NotNull
     private Category category;
     private int maxParticipants;
+    private String formattedDate;
 }
