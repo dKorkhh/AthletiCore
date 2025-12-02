@@ -30,7 +30,8 @@ public class HolidayService {
 
     public List<HolidayDto> getListOfHolidays() {
         int currentYear = java.time.Year.now().getValue();
-        ResponseEntity<HolidayDto[]> response = restTemplate.getForEntity(String.format(HOLIDAY_API_URL, currentYear, region), HolidayDto[].class);
+        ResponseEntity<HolidayDto[]> response = restTemplate
+                .getForEntity(String.format(HOLIDAY_API_URL, currentYear, region), HolidayDto[].class);
 
         if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null){
             return Arrays.asList(response.getBody());

@@ -16,6 +16,6 @@ public class Schedule {
     @JoinColumn(name = "user_id", nullable = false)
     private User trainer;
 
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Session> timeSlots;
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Session> sessions;
 }

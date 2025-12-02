@@ -25,10 +25,10 @@ public class SessionDto {
     @NotNull
     @DateIsNotHolidayValidator
     private LocalDateTime date;
-    private boolean isRepeat;
+    private boolean repeat;
     private int duration;
     @NotNull
-    private UserDto trainer;
+    private Long trainerId;
     private Difficulty difficulty;
     @NotNull
     private Category category;

@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 import java.util.Properties;
 
@@ -28,6 +29,11 @@ public class AppConfig {
     @ConditionalOnMissingBean(NotificationServiceImpl.class)
     public NotificationDefaultService defaultNotificationService() {
         return new NotificationDefaultService(new NotificationProperties());
+    }
+
+    @Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
     }
 
     @Bean

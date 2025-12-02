@@ -505,3 +505,104 @@ button:hover {
     background: #333;
 }
 
+.form-wrapper {
+    width: 500px;
+    margin: 40px auto;
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 0 25px rgba(150, 103, 224, 0.25);
+    border: 1px solid rgba(150, 103, 224, 0.25);
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #c9a8ff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.session-form label {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #cfcfcf;
+    font-weight: 600;
+}
+
+.session-form input,
+.session-form select,
+.session-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #2b2b2b;
+    border: 1px solid #3a3a3a;
+    color: #e0e0e0;
+    margin-top: 5px;
+    transition: 0.2s;
+}
+
+.session-form input:focus,
+.session-form select:focus,
+.session-form textarea:focus {
+    outline: none;
+    border-color: #9667E0;
+    box-shadow: 0 0 8px rgba(150, 103, 224, 0.5);
+}
+
+/* Checkbox */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #9667E0;
+}
+
+/* Primary button */
+.primary-btn {
+    margin-top: 30px;
+    width: 100%;
+    padding: 12px;
+    background: #9667E0;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.primary-btn:hover {
+    background: #7e4fd1;
+    box-shadow: 0 0 12px rgba(150, 103, 224, 0.7);
+}
+
+/* Error styling */
+.error {
+    color: #ff6b6b;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+/* Dark topbar support */
+.topbar {
+    background: #1b1b1b !important;
+    border-bottom: 1px solid #2b2b2b;
+}
+
+.topbar a {
+    color: #dcdcdc !important;
+}
+
+.topbar a:hover {
+    color: #9667E0 !important;
+}

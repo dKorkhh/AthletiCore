@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Керування тренуваннями</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div th:replace="~{fragment/topbar :: topbar}"></div>
+
+<main>
+  <h2>Усі тренування</h2>
+
+  <a class="add-btn" th:href="@{/api/sessions/add}">Додати тренування</a>
+
+  <table class="admin-table">
+    <thead>
+    <tr>
+      <th>Назва</th>
+      <th>Дата</th>
+      <th>Тренер</th>
+      <th>Місця</th>
+      <th>Дії</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="s : ${trainingSessions}">
+      <td th:text="${s.name}"></td>
+      <td th:text="${s.date}"></td>
+      <td th:text="${s.trainer.fullName}"></td>
+      <td th:text="${s.maxParticipants}"></td>
+
+      <td>
+        <a th:href="@{/api/sessions/edit/{id}(id=${s.id})}" class="edit-btn">Редагувати</a>
+        <form th:action="@{/api/sessions/{id}(id=${s.id})}"
+              method="post"
+              onsubmit="return confirm('Ви впевнені?')">
+
+          <input type="hidden" name="_method" value="delete"/>
+          <button type="submit" class="delete-btn">Видалити</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>

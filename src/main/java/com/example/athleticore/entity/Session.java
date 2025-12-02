@@ -57,7 +57,7 @@ public class Session {
     @JoinColumn(name = "schedule_id", nullable = true)
     private Schedule schedule;
 
-    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "session", cascade = CascadeType.REMOVE)
     private List<Booking> bookings = new ArrayList<>();
 }
 

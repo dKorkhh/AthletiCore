@@ -26,9 +26,5 @@ public class Notification {
 
     @ManyToMany(mappedBy = "notifications")
     private Set<User> clients;
-
-    @OneToOne
-    @JoinColumn(name = "session_id")
-    private Session session;
 }
 

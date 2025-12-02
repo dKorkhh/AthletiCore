@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Створення тренування</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragment/topbar :: topbar}"></div>
+
+<main class="form-wrapper">
+
+    <h2 class="form-title">Створити тренування</h2>
+
+    <form th:action="@{/api/sessions/add}" th:object="${sessionDto}" method="post" class="session-form">
+        <label>Назва тренування</label>
+        <input type="text" th:field="*{name}" placeholder="Наприклад: Cardio Mix">
+        <div class="error" th:if="${#fields.hasErrors('name')}"
+             th:errors="*{name}"></div>
+
+        <label>Опис</label>
+        <textarea th:field="*{description}" placeholder="Короткий опис тренування (необов'язково)"></textarea>
+
+        <label>Тип тренування</label>
+        <select th:field="*{sessionType}">
+            <option th:each="t : ${sessionTypes}"
+                    th:value="${t}"
+                    th:text="${t}"></option>
+        </select>
+
+        <label>Дата та час</label>
+        <input type="datetime-local"
+               th:field="*{date}"
+               th:value="${#temporals.format(sessionDto.date, 'yyyy-MM-dd\'T\'HH:mm')}">
+        <div class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+
+        <label class="checkbox-label">
+            <input type="hidden" name="repeat" value="false"/>
+            <input type="checkbox" th:field="*{repeat}">
+            Повторювати щотижня
+        </label>
+
+        <label>Тривалість (хвилини)</label>
+        <input type="number" th:field="*{duration}" min="5" placeholder="Напр: 60">
+
+        <label>Тренер</label>
+        <select th:field="*{trainer.id}">
+            <option th:each="u : ${trainers}"
+                    th:value="${u.id}"
+                    th:text="${u.fullName}"></option>
+        </select>
+        <div class="error" th:if="${#fields.hasErrors('trainer')}" th:errors="*{trainer}"></div>
+
+        <label>Категорія</label>
+        <select th:field="*{category}">
+            <option th:each="c : ${categories}"
+                    th:value="${c}"
+                    th:text="${c}"></option>
+        </select>
+
+        <label>Складність</label>
+        <select th:field="*{difficulty}">
+            <option th:each="d : ${difficulties}"
+                    th:value="${d}"
+                    th:text="${d}"></option>
+        </select>
+
+        <label>Макс. кількість учасників</label>
+        <input type="number" th:field="*{maxParticipants}" min="1" placeholder="Напр: 12">
+
+        <button type="submit" class="primary-btn">Створити</button>
+
+    </form>
+</main>
+</body>
+</html>

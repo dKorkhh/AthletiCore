@@ -10,4 +10,7 @@ public interface BookingService {
     BookingResponseDTO createBooking(Long sessionId);
     void cancelBooking(BookingDto bookingDto);
     public List<Booking> getAllBooking();
+    List<Booking> findBookingsByCurrentUser();
+    List<Booking> findBookingsBySessionId(Long id);
+    void deleteBookingBySessionId(Long id);
 }

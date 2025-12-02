@@ -20,7 +20,7 @@
         </span>
 
         <span sec:authorize="isAuthenticated()">
-            <a href="/account" th:href="@{/account}">Account</a>
+            <a href="/account" th:href="@{/api/account}">Account</a>
             <a href="/api/auth/logout" th:href="@{/api/auth/logout}">Log out</a>
         </span>
     </nav>

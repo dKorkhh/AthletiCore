@@ -11,6 +11,7 @@ public interface UserService {
     User addUser(UserDto dto);
     User getUserById(Long id);
     List<User> getAllUser();
+    List<User> findAllTrainers();
     Optional<User> getUserByEmail(String email);
     void deleteUserById(Long id);
     User updateUser(PatchDto dto);
