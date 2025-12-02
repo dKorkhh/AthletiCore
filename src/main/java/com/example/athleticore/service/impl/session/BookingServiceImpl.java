@@ -10,7 +10,6 @@ import com.example.athleticore.enums.BookingStatus;
 import com.example.athleticore.exception.data.NoDataFoundException;
 import com.example.athleticore.repository.BookingRepository;
 import com.example.athleticore.service.BookingService;
-import com.example.athleticore.service.impl.notification.NotificationServiceImpl;
 import com.example.athleticore.service.impl.user.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +17,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Book;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -62,11 +61,12 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void cancelBooking(BookingDto bookingDto) {
+
     }
 
     @Override
     public List<Booking> getAllBooking() {
-        return bookingRepository.findAll();
+        return List.of();
     }
 
     @Override
@@ -87,16 +87,27 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public void deleteBookingBySessionId(Long id) {
+
+    }
+
+    @Override
     public List<Booking> getAllBookingWithSession() {
         return bookingRepository.findAllWithSession();
     }
 
-    public List<Booking> findByUserId(Long userId) {
-        return bookingRepository.findBookingsByClientId(userId);
+    @Override
+    public List<Booking> findExpiredBookings(List<BookingStatus> statuses, LocalDateTime threshold) {
+        return bookingRepository.findExpiredBookings(statuses, threshold);
     }
 
-    public Booking findBookingById(Long bookingId) {
-        return bookingRepository.findBookingsById(bookingId)
-                .orElseThrow(() -> new NoDataFoundException("No such booking with id #" + bookingId));
+    @Override
+    public List<Booking> findAllById(List<Long> bookingIds) {
+        return bookingRepository.findAllById(bookingIds);
+    }
+
+    @Override
+    public void saveAll(List<Booking> expired) {
+        bookingRepository.saveAll(expired);
     }
 }
