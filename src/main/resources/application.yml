@@ -23,7 +23,11 @@ spring:
         schema-locations: classpath:/schema.sql
     security:
       jwtToken: "8H8L8WT9gIYOW/9dlDIYLuPvsHMTOAoV2cywT8VWX4MsGuGVm5S5+YDWHFv/XyjP"
-
+    batch:
+      job:
+        enabled: false
+      jdbc:
+        initialize-schema: always
 
 
 springdoc:
