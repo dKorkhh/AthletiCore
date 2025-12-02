@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Деталі тренування</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div th:replace="~{fragment/topbar :: topbar}"></div>
+
+<main>
+    <h2 th:text="${session.name}"></h2>
+
+    <p><b>Дата:</b> <span th:text="${session.date}"></span></p>
+    <p><b>Максимум місць:</b> <span th:text="${session.maxParticipants}"></span></p>
+
+    <h3>Список клієнтів</h3>
+
+    <ul>
+        <li th:each="b : ${bookings}">
+            <span th:text="${b.client.fullName.lastName + ' ' + b.client.fullName.firstName}"></span>
+            (статус:<span th:text="${b.bookingStatus}"></span>)
+        </li>
+    </ul>
+</main>
+</body>
+</html>

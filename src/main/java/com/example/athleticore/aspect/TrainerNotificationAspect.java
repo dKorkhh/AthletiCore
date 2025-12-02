@@ -5,6 +5,7 @@ import com.example.athleticore.entity.users.User;
 import com.example.athleticore.mapper.UserMapper;
 import com.example.athleticore.repository.UserRepository;
 import com.example.athleticore.service.NotificationService;
+import com.example.athleticore.service.impl.user.UserServiceImpl;
 import io.jsonwebtoken.lang.Strings;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.Level;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Component;
 public class TrainerNotificationAspect {
 
     private final UserRepository userRepository;
+    private final UserServiceImpl userService;
     private final NotificationService notificationService;
     private final UserMapper userMapper;
     private static final Logger logger = LogManager.getLogger(TrainerNotificationAspect.class);
@@ -43,7 +45,7 @@ public class TrainerNotificationAspect {
     private String extractTrainerEmail(Object[] args) {
         for (Object arg : args) {
             if (arg instanceof SessionDto dto) {
-                return dto.getTrainer().getEmail();
+                return userService.getUserById(dto.getTrainerId()).getEmail();
             }
         }
         return null;

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <title>Мої тренування</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div th:replace="~{fragment/topbar :: topbar}"></div>
+
+<main>
+  <h2>Мої тренування</h2>
+
+  <table class="trainer-table">
+    <thead>
+    <tr>
+      <th>Назва</th>
+      <th>Дата</th>
+      <th>Місця</th>
+      <th>Записалось</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="s : ${trainingSessions}">
+      <td th:text="${s.name}"></td>
+      <td th:text="${s.date}"></td>
+      <td th:text="${s.maxParticipants}"></td>
+
+      <td>
+        <a th:href="@{/api/sessions/details/{id}(id=${s.id})}" class="view-btn">Показати більше</a>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+</main>
+</body>
+</html>

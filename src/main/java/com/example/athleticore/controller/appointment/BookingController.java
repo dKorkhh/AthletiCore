@@ -42,7 +42,7 @@ public class BookingController {
 
     //role - userF
     @PostMapping("/{sessionId}")
-    @PreAuthorize("hasRole('ROLE_CLIENT')")
+    //@PreAuthorize("hasRole('ROLE_CLIENT')")
     public String createBooking(@PathVariable Long sessionId, Model model){
         BookingResponseDTO booking = bookingService.createBooking(sessionId);
         model.addAttribute("booking", booking);

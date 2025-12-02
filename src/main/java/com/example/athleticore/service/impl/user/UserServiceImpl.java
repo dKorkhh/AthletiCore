@@ -4,6 +4,7 @@ import com.example.athleticore.dto.patch.PatchDto;
 import com.example.athleticore.dto.user.UserDto;
 import com.example.athleticore.entity.users.User;
 import com.example.athleticore.enums.Role;
+import com.example.athleticore.exception.user.NoSuchUserException;
 import com.example.athleticore.mapper.UserMapper;
 import com.example.athleticore.repository.UserRepository;
 import com.example.athleticore.service.user.UserService;
@@ -38,7 +39,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long id) {
-        return null;
+        return userRepository.getUserById(id)
+                .orElseThrow(() -> new NoSuchUserException("Don't found user with id #" + id));
     }
 
     @Override
@@ -54,6 +56,13 @@ public class UserServiceImpl implements UserService {
         } finally {
             ThreadContext.clearMap();
         }
+    }
+
+    @Override
+    public List<User> findAllTrainers() {
+        return userRepository.findAll().stream()
+                .filter(user -> user.getRole().equals(Role.TRAINER))
+                .toList();
     }
 
     @Override
@@ -82,5 +91,19 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public Role getRoleOfCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new RuntimeException("User is not authenticated");
+        }
+
+        String email = auth.getName();
+
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"))
+                .getRole();
     }
 }

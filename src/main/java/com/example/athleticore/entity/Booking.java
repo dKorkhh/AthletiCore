@@ -23,7 +23,7 @@ public class Booking {
     @JoinColumn(name = "CLIENT_ID", nullable = false)
     private User client;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "SESSION_ID", nullable = false)
     private Session session;
 

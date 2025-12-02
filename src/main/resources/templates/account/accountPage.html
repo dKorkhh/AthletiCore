@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мій акаунт – AthletiCore</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<div th:replace="~{fragment/topbar :: topbar}"></div>
+
+<div class="booking-container">
+    <h1 class="booking-title">Мої бронювання</h1>
+
+    <div th:if="${#lists.isEmpty(bookings)}">
+        <p style="text-align:center; font-size:1.2rem; margin-top:2rem;">
+            У вас ще немає бронювань.
+        </p>
+    </div>
+
+    <div th:each="b : ${bookings}" class="booking-info">
+        <p>
+            <span>Тренування:</span>
+            <span th:text="${b.session.name}"></span>
+        </p>
+
+        <p>
+            <span>Дата:</span>
+            <span th:text="${#temporals.format(b.session.date, 'dd.MM.yyyy HH:mm')}"></span>
+        </p>
+
+        <p>
+            <span>Статус:</span>
+            <span th:text="${b.bookingStatus}"></span>
+        </p>
+
+        <button class="book-btn"
+                th:if="${b.bookingStatus.name() == 'ACTIVE'}"
+                th:attr="onclick=|openCancelModal(${b.id})|">
+            Скасувати бронювання
+        </button>
+    </div>
+</div>
+
+<div class="modal" id="cancelModal">
+    <div class="modal-content">
+        <h2>Підтвердити скасування?</h2>
+        <p>Ви впевнені, що хочете скасувати це бронювання?</p>
+
+        <form th:action="@{/api/booking/cancel}" method="post">
+            <input type="hidden" id="cancelBookingId" name="bookingId">
+            <button type="submit" class="book-btn" style="margin-top:1rem;">Підтвердити</button>
+        </form>
+
+        <button class="close-btn" onclick="closeCancelModal()">Закрити</button>
+    </div>
+</div>
+
+<script>
+    function openCancelModal(id) {
+        document.getElementById("cancelBookingId").value = id;
+        document.getElementById("cancelModal").classList.add("open");
+    }
+
+    function closeCancelModal() {
+        document.getElementById("cancelModal").classList.remove("open");
+    }
+</script>
+
+</body>
+</html>
