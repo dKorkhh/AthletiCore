@@ -20,6 +20,6 @@ public class SchedularService {
 
     @Scheduled(fixedRate = 3600000)
     public void runHourlyTask() {
-        notificationService.sendNotificationBeforeSession(1);
+        notificationService.sendNotificationBeforeSession(3600);
     }
 }

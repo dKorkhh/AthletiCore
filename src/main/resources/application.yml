@@ -21,7 +21,6 @@ spring:
     sql:
       init:
         schema-locations: classpath:/schema.sql
-        data-locations: classpath:/data.sql
     security:
       jwtToken: "8H8L8WT9gIYOW/9dlDIYLuPvsHMTOAoV2cywT8VWX4MsGuGVm5S5+YDWHFv/XyjP"
 

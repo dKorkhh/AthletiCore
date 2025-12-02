@@ -87,8 +87,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void deleteBookingBySessionId(Long id) {
-        bookingRepository.deleteBookingsBySessionId(id);
+    public List<Booking> getAllBookingWithSession() {
+        return bookingRepository.findAllWithSession();
     }
 
     public List<Booking> findByUserId(Long userId) {

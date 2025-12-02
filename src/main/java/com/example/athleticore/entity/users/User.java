@@ -4,7 +4,6 @@ import com.example.athleticore.dto.user.FullName;
 import com.example.athleticore.entity.Booking;
 import com.example.athleticore.entity.Notification;
 import com.example.athleticore.entity.Schedule;
-import com.example.athleticore.enums.Category;
 import com.example.athleticore.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,9 +33,6 @@ public class User {
     private String email;
     private String password;
     private String phoneNumber;
-
-    @Enumerated(EnumType.STRING)
-    private Category category;
 
     @Enumerated(EnumType.STRING)
     private Role role;
