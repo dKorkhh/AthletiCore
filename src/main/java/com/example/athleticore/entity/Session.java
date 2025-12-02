@@ -13,31 +13,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Builder;
 
-@Data
+@Getter
+@Setter
 @Builder
 @Entity
 @Table(name = "sessions")
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     private String name;
-
     private String description;
 
     @Enumerated(EnumType.STRING)
     private SessionType sessionType;
 
     private LocalDateTime date;
-
     private boolean isRepeat;
-
     private int duration;
 
     @ManyToOne
@@ -53,11 +52,11 @@ public class Session {
     @Column(name = "max_participants")
     private int maxParticipants;
 
-    @ManyToOne
-    @JoinColumn(name = "schedule_id", nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "schedule_id")
     private Schedule schedule;
 
-    @OneToMany(mappedBy = "session", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "session", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Booking> bookings = new ArrayList<>();
 }
 

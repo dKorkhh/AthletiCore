@@ -16,10 +16,41 @@ VALUES
     (4);
 
 -- ===== SESSIONS =====
-INSERT INTO SESSIONS (NAME, DESCRIPTION, SESSION_TYPE, DATE, IS_REPEAT, DURATION, USER_ID, CATEGORY, DIFFICULTY, MAX_PARTICIPANTS, SCHEDULE_ID)
+INSERT INTO SESSIONS
+(NAME, DESCRIPTION, SESSION_TYPE, DATE, IS_REPEAT, DURATION, USER_ID, CATEGORY, DIFFICULTY, MAX_PARTICIPANTS, SCHEDULE_ID)
 VALUES
-    ('Morning Cardio', 'Intense morning cardio session to boost energy.', 'GROUP', '2025-11-05', true, 60, 1, 'FITNESS', 'NORMAL', 15, 1),
-    ('Yoga for Beginners', 'Relaxing yoga class for beginners focusing on flexibility.', 'GROUP', '2025-11-06', true, 75, 2, 'YOGA', 'LIGHT', 12, 2),
-    ('Personal Training', 'One-on-one strength training with John Doe.', 'INDIVIDUAL', '2025-11-07', 90, false, 1, 'FITNESS', 'HARD', 1, 1),
-    ('Stretch & Relax', 'Gentle stretching and breathing exercises.', 'GROUP', '2025-11-08', true, 45, 2, 'BOXING', 'LIGHT', 10, 2),
-    ('Pilates Core', 'Focus on core stability and posture.', 'GROUP', '2025-11-09', false, 60, 2, 'PILATES', 'NORMAL', 10, 2);
+('Morning Cardio', 'High-intensity cardio start of week.', 'GROUP', '2025-11-03 09:00:00', true, 60, 1, 'FITNESS', 'NORMAL', 20, 1),
+('Boxing Basics', 'Boxing fundamentals for beginners.', 'GROUP', '2025-11-03 18:00:00', true, 60, 1, 'FITNESS', 'HARD', 16, 1),
+
+('CrossFit Power', 'Full body crossfit workout.', 'GROUP', '2025-11-04 19:00:00', true, 90, 1, 'FITNESS', 'HARD', 15, 1),
+
+('TRX Strength', 'Suspension training for full body.', 'GROUP', '2025-11-05 10:00:00', true, 60, 1, 'FITNESS', 'NORMAL', 14, 1),
+('Strength Training', 'Upper body strength focus.', 'INDIVIDUAL', '2025-11-05 17:00:00', false, 90, 1, 'FITNESS', 'HARD', 1, 1),
+
+('Functional Workout', 'Mobility + functional movements.', 'GROUP', '2025-11-06 08:00:00', true, 50, 1, 'FITNESS', 'LIGHT', 18, 1),
+
+('Personal Coaching', 'One-on-one personalized training.', 'INDIVIDUAL', '2025-11-07 11:00:00', false, 90, 1, 'FITNESS', 'HARD', 1, 1),
+
+('Stretch & Mobility', 'Gentle stretching and flexibility.', 'GROUP', '2025-11-08 09:00:00', true, 45, 1, 'FITNESS', 'LIGHT', 20, 1),
+
+('Sunday Yoga', 'Light yoga session for recovery.', 'GROUP', '2025-11-09 10:00:00', true, 60, 1, 'YOGA', 'LIGHT', 20, 1);
+
+INSERT INTO SESSIONS
+(NAME, DESCRIPTION, SESSION_TYPE, DATE, IS_REPEAT, DURATION, USER_ID, CATEGORY, DIFFICULTY, MAX_PARTICIPANTS, SCHEDULE_ID)
+VALUES
+('Morning Barre', 'Barre fusion for posture & tone.', 'GROUP', '2025-11-03 08:00:00', true, 55, 2, 'YOGA', 'NORMAL', 15, 2),
+('Evening Yoga', 'Slow flow yoga for all levels.', 'GROUP', '2025-11-03 19:00:00', true, 70, 2, 'YOGA', 'LIGHT', 18, 2),
+
+('Pilates Classic', 'Core strengthening pilates practice.', 'GROUP', '2025-11-04 10:00:00', true, 60, 2, 'PILATES', 'NORMAL', 12, 2),
+
+('Relax Stretch', 'Gentle stretching session.', 'GROUP', '2025-11-05 18:00:00', true, 60, 2, 'YOGA', 'LIGHT', 18, 2),
+
+('Meditation Practice', 'Breathing & mindfulness.', 'GROUP', '2025-11-06 08:30:00', true, 40, 2, 'YOGA', 'LIGHT', 25, 2),
+('Soft Yoga Flow', 'Calm & slow movements for mind-body.', 'GROUP', '2025-11-06 17:30:00', true, 60, 2, 'YOGA', 'LIGHT', 20, 2),
+
+('Pilates Core', 'Deep core activation exercises.', 'GROUP', '2025-11-07 09:00:00', false, 60, 2, 'PILATES', 'NORMAL', 14, 2),
+
+('Weekend Yoga Flow', 'Medium intensity weekend practice.', 'GROUP', '2025-11-08 11:00:00', true, 75, 2, 'YOGA', 'NORMAL', 20, 2),
+
+('Restorative Yoga', 'Full relaxation and deep breathing.', 'GROUP', '2025-11-09 09:00:00', true, 60, 2, 'YOGA', 'LIGHT', 16, 2);
+
