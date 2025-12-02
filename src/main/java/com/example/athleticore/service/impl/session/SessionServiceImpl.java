@@ -4,11 +4,11 @@ import com.example.athleticore.dto.sessions.SessionDto;
 import com.example.athleticore.entity.Session;
 import com.example.athleticore.entity.users.User;
 import com.example.athleticore.exception.data.NoDataFoundException;
-import com.example.athleticore.exception.user.NoSuchUserException;
 import com.example.athleticore.mapper.SessionMapper;
 import com.example.athleticore.mapper.UserMapper;
 import com.example.athleticore.repository.SessionRepository;
 import com.example.athleticore.service.SessionService;
+import com.example.athleticore.service.impl.schedule.ScheduleServiceImpl;
 import com.example.athleticore.service.impl.user.UserServiceImpl;
 import com.example.athleticore.utils.NotifyTrainerOnCreate;
 import jakarta.transaction.Transactional;
@@ -26,6 +26,7 @@ public class SessionServiceImpl implements SessionService {
     private final SessionRepository sessionRepository;
     private final SessionMapper sessionMapper;
     private final UserMapper userMapper;
+    private final ScheduleServiceImpl scheduleService;
 
     @Override
     public void incrementSessionCount(Session sessionId) {
@@ -47,6 +48,7 @@ public class SessionServiceImpl implements SessionService {
 
         sessionEntity.setTrainer(trainer);
         sessionRepository.save(sessionEntity);
+        scheduleService.addSessionToSchedule(sessionEntity);
 
         return sessionEntity;
     }
@@ -104,6 +106,8 @@ public class SessionServiceImpl implements SessionService {
         if (session.getSchedule() != null) {
             session.setSchedule(null);
         }
+
+        scheduleService.removeSessionFromSchedule(session);
         sessionRepository.deleteById(id);
     }
 }

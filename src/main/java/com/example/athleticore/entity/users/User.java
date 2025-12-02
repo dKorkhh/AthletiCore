@@ -7,7 +7,7 @@ import com.example.athleticore.entity.Schedule;
 import com.example.athleticore.enums.Category;
 import com.example.athleticore.enums.Role;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,20 +15,24 @@ import java.util.List;
 import java.util.Set;
 
 @Table(name = "users")
-@Data
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Embedded
     private FullName fullName;
 
     private String email;
-
     private String password;
-
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
@@ -37,7 +41,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne(mappedBy = "trainer", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "trainer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Schedule schedule;
 
     @ManyToMany
