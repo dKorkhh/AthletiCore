@@ -1,6 +1,5 @@
 package com.example.athleticore.dto.sessions;
 
-import com.example.athleticore.dto.user.UserDto;
 import com.example.athleticore.enums.Category;
 import com.example.athleticore.enums.Difficulty;
 import com.example.athleticore.enums.SessionType;

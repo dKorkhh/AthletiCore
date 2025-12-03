@@ -2,7 +2,6 @@ package com.example.athleticore.dto.user;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import org.apache.logging.log4j.util.Strings;
 
 @Embeddable

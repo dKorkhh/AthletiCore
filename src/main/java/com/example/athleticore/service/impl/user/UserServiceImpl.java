@@ -10,7 +10,6 @@ import com.example.athleticore.exception.user.NoSuchUserException;
 import com.example.athleticore.mapper.UserMapper;
 import com.example.athleticore.repository.SessionRepository;
 import com.example.athleticore.repository.UserRepository;
-import com.example.athleticore.service.impl.session.SessionServiceImpl;
 import com.example.athleticore.service.user.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

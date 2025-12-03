@@ -35,7 +35,7 @@ class DateIsNotHolidayValidateTest {
     private ConstraintValidatorContext.ConstraintViolationBuilder builder;
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
-    private static final LocalDateTime TEST_DATE = LocalDateTime.of(2025, 11, 9, 12, 0); // November 09, 2025
+    private static final LocalDateTime TEST_DATE = LocalDateTime.of(2025, 11, 9, 12, 0);
 
     @BeforeEach
     void setUp() {

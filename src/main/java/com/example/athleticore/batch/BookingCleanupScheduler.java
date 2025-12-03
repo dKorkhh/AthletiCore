@@ -1,7 +1,8 @@
 package com.example.athleticore.batch;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
@@ -14,11 +15,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Configuration
 @EnableScheduling
 @RequiredArgsConstructor
-@Slf4j
 public class BookingCleanupScheduler {
 
     private final JobLauncher jobLauncher;
     private final Job bookingCleanupJob;
+    private static final Logger logger = LogManager.getLogger(BookingCleanupScheduler.class);
 
     @Scheduled(cron = "0 0 * * * *")
     public void runBookingCleanupJobOnSchedule() throws Exception {
@@ -29,6 +30,6 @@ public class BookingCleanupScheduler {
                 .toJobParameters();
 
         JobExecution execution = jobLauncher.run(bookingCleanupJob, params);
-        log.info("Scheduled bookingCleanupJob started: {}", execution.getId());
+        logger.info("Scheduled bookingCleanupJob started: {}", execution.getId());
     }
 }

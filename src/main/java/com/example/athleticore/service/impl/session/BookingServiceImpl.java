@@ -1,7 +1,5 @@
 package com.example.athleticore.service.impl.session;
 
-import com.example.athleticore.aspect.ExceptionHandlingAspect;
-import com.example.athleticore.dto.bookings.BookingDto;
 import com.example.athleticore.dto.bookings.BookingResponseDTO;
 import com.example.athleticore.entity.Booking;
 import com.example.athleticore.entity.Session;
@@ -16,10 +14,7 @@ import com.example.athleticore.service.BookingService;
 import com.example.athleticore.service.impl.user.UserServiceImpl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -75,16 +70,6 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void cancelBooking(BookingDto bookingDto) {
-
-    }
-
-    @Override
-    public List<Booking> getAllBooking() {
-        return List.of();
-    }
-
-    @Override
     public List<Booking> findBookingsByCurrentUser() {
         String email = userService.getCurrentUser().getEmail();
 
@@ -97,11 +82,6 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> findBookingsBySessionId(Long id) {
         return bookingRepository.findBookingsBySessionId(id);
-    }
-
-    @Override
-    public void deleteBookingBySessionId(Long id) {
-
     }
 
     @Override

@@ -1,17 +1,11 @@
 package com.example.athleticore.aspect;
 
 import com.example.athleticore.dto.sessions.SessionDto;
-import com.example.athleticore.entity.Notification;
 import com.example.athleticore.entity.Session;
 import com.example.athleticore.entity.users.User;
-import com.example.athleticore.mapper.UserMapper;
 import com.example.athleticore.repository.UserRepository;
-import com.example.athleticore.service.NotificationService;
 import com.example.athleticore.service.impl.notification.NotificationServiceImpl;
-import com.example.athleticore.service.impl.user.UserServiceImpl;
-import io.jsonwebtoken.lang.Strings;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;

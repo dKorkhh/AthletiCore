@@ -7,7 +7,6 @@ import com.example.athleticore.entity.users.User;
 import com.example.athleticore.exception.data.NoDataFoundException;
 import com.example.athleticore.exception.limit.SessionTimeOutOfRangeException;
 import com.example.athleticore.mapper.SessionMapper;
-import com.example.athleticore.mapper.UserMapper;
 import com.example.athleticore.repository.SessionRepository;
 import com.example.athleticore.service.SessionService;
 import com.example.athleticore.service.impl.schedule.ScheduleServiceImpl;

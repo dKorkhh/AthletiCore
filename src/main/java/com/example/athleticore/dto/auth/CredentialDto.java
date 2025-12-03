@@ -1,7 +1,6 @@
 package com.example.athleticore.dto.auth;
 
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
